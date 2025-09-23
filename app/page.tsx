@@ -55,19 +55,18 @@ export default function HomePage() {
     <div className="min-h-screen theme-transition relative overflow-hidden">
        
       <HeroSection persona={persona} onTogglePersona={togglePersona} />
-            <LogoLoop
-        logos={techLogos}
-        speed={120}
-        direction="left"
-        logoHeight={48}
-        gap={40}
-        scaleOnHover
-        pauseOnHover={false}
-        fadeOut
-                className="p-10 bg-trasparent my-10 absolute w-full z-50"
-
-        fadeOutColor="#000000"
-        ariaLabel="Technology partners"
+        <LogoLoop
+      logos={techLogos}
+      speed={120}
+      direction="left"
+      logoHeight={48}
+      gap={40}
+      scaleOnHover
+      pauseOnHover={false}
+      fadeOut
+      className="-py-10 bg-trasparent backdrop-blur-sm  fixed top-0 w-full z-50"
+      fadeOutColor="#000000"
+      ariaLabel="Technology partners"
       />
       <AboutSection persona={persona} />
 
