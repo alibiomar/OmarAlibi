@@ -1,0 +1,317 @@
+{
+  "engineer": {
+    "sectionTitle": "Technical Projects & Experience",
+    "description": "Electrical Engineering student with expertise in IoT systems, embedded electronics, web development, and industrial automation. Experienced in both academic research and professional internship projects.",
+    "projects": [
+      {
+        "title": "IoT Dashboard for Connected Industrial Machines",
+        "description": "Developed a comprehensive data acquisition server for industrial machines with real-time web visualization interface, transformed into a standalone desktop application. Implemented WhatsApp alert system and automated consumption report generation with email delivery.",
+        "technologies": ["Node.js", "Real-time Dashboard", "WhatsApp API", "Email Automation", "Desktop App", "Industrial IoT"],
+        "category": "IoT Systems",
+        "year": "2025",
+        "status": "Completed",
+        "image": "/iot-dashboard-industrial-machines-monitoring.jpg",
+        "featured": true,
+        "company": "Personal Project",
+        "technicalDetails": [
+          "Real-time data acquisition from industrial machines",
+          "Web-based visualization interface with responsive design",
+          "Desktop application conversion for offline usage",
+          "WhatsApp integration for instant alerts and notifications",
+          "Automated report generation with email delivery system"
+        ]
+      },
+      {
+        "title": "Database File Processor - Full-Stack Web Application",
+        "description": "Built a complete React + Node.js application for uploading and analyzing multiple file formats (CSV, JSON, Excel, SQLite). Features interactive data visualization with dynamic tables and ChartJS graphs, with optimized memory handling for large files.",
+        "technologies": ["React", "Node.js", "ChartJS", "File Processing", "Data Visualization", "Memory Optimization"],
+        "category": "Web Development",
+        "year": "2025",
+        "status": "Completed",
+        "image": "/database-file-processor-web-application.jpg",
+        "featured": true,
+        "company": "Personal Project",
+        "technicalDetails": [
+          "Support for CSV, JSON, Excel, and SQLite file formats",
+          "Memory-optimized processing for large files using streaming",
+          "Interactive data visualization with ChartJS integration",
+          "Dynamic filtering and export capabilities",
+          "Asynchronous file reading for improved performance"
+        ]
+      },
+      {
+        "title": "Data Fusion System for IMU Orientation Sensors",
+        "description": "Developed advanced Kalman Filter fusion algorithm for inertial sensors (accelerometers, gyroscopes) implemented on STM32 platform. Created simulation software with Qt Creator and optimized algorithms to minimize orientation estimation errors.",
+        "technologies": ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing"],
+        "category": "Embedded Systems",
+        "year": "2024",
+        "status": "Completed",
+        "image": "/imu-sensor-data-fusion-stm32-kalman.jpg",
+        "featured": true,
+        "company": "ENIT - Academic Project (PFA2)",
+        "technicalDetails": [
+          "Advanced Kalman Filter implementation for sensor fusion",
+          "STM32 embedded platform optimization",
+          "Qt Creator simulation environment",
+          "Real-time orientation estimation with error minimization",
+          "IMU sensor integration (accelerometers, gyroscopes)"
+        ]
+      },
+      {
+        "title": "Real-time ESP32/Firebase Messaging System",
+        "description": "Built a complete instant messaging system with ESP32 microcontroller integration and Firebase backend. Implemented user authentication, message management, online status tracking, and responsive web interface with enhanced security.",
+        "technologies": ["ESP32", "Firebase", "Real-time Database", "Web Interface", "Authentication", "IoT Communication"],
+        "category": "IoT Communication",
+        "year": "2025",
+        "status": "Completed",
+        "image": "/esp32-firebase-messaging-system-iot.jpg",
+        "featured": false,
+        "company": "Personal Project",
+        "technicalDetails": [
+          "ESP32 microcontroller integration with Firebase",
+          "Real-time messaging with WebSocket communication",
+          "User authentication and session management",
+          "Online status tracking and presence detection",
+          "Responsive web interface with security features"
+        ]
+      },
+      {
+        "title": "OnWire Link - IoT Firmware & Mobile App",
+        "description": "Designed embedded firmware in C++ with web server, MQTT, and WiFiManager. Developed Flutter mobile application with Firebase integration, QR scanning, and hybrid MQTT/local AP control architecture using Raspberry Pi server.",
+        "technologies": ["C++ Arduino", "Flutter/Dart", "Firebase", "MQTT", "Express.js", "Raspberry Pi"],
+        "category": "Professional IoT",
+        "year": "2025",
+        "status": "Completed",
+        "image": "/onwire-link-iot-firmware-mobile-app.jpg",
+        "featured": true,
+        "company": "OnWire Link - Engineering Internship",
+        "technicalDetails": [
+          "Embedded firmware development in C++ for IoT devices",
+          "Flutter mobile application with Firebase integration",
+          "QR code scanning for device pairing",
+          "MQTT protocol implementation for device communication",
+          "Raspberry Pi server setup with Express.js backend"
+        ]
+      },
+      {
+        "title": "DC Motor Speed Controller with Custom PCB",
+        "description": "Complete electronic board design using Eagle PCB software with circuit simulation and optimization using PSpice. Developed voltage regulation system specifically for industrial motor control applications.",
+        "technologies": ["Eagle PCB", "PSpice", "Circuit Design", "Voltage Regulation", "Industrial Control", "PCB Design"],
+        "category": "Circuit Design",
+        "year": "2024",
+        "status": "Completed",
+        "image": "/dc-motor-speed-controller-pcb-design.jpg",
+        "featured": false,
+        "company": "ENIT - Academic Project",
+        "technicalDetails": [
+          "PCB design and layout using Eagle software",
+          "Circuit simulation and optimization with PSpice",
+          "Voltage regulation system for motor control",
+          "Industrial-grade component selection",
+          "Testing and validation protocols"
+        ]
+      }
+    ],
+    "skills": {
+      "embedded": {
+        "title": "Embedded Systems",
+        "description": "Arduino, ESP32/8266, STM32, Raspberry Pi, BeagleBone, FPGA, PCB Design"
+      },
+      "web": {
+        "title": "Web & Software",
+        "description": "React, Next.js, Node.js, Python, Flutter, C/C++, Rust"
+      },
+      "iot": {
+        "title": "IoT & Industrial",
+        "description": "MQTT, Industrial Automation, Real-time Systems"
+      }
+    },
+    "academic": {
+      "institution": "ENIT",
+      "program": "Electrical Engineering",
+      "fullName": "National Engineering School of Tunis",
+      "duration": "2023 - Present",
+      "experience": [
+        { "company": "OnWire Link", "role": "Engineering Intern" },
+        { "company": "STEG", "role": "Technical Intern" },
+        { "company": "ASHE", "role": "Founder & Manager" }
+      ]
+    }
+  },
+  "freelancer": {
+    "sectionTitle": "Web Development & Brand Identity Portfolio",
+    "description": "Full-stack web developer and brand designer specializing in Next.js development and comprehensive brand identity solutions. Experienced in e-commerce platforms, business websites, and complete branding packages for diverse industries.",
+    "projects": [
+      {
+        "title": "Meninx - Car Rental Platform",
+        "description": "Complete web development for a professional car rental company using Next.js. Built responsive booking system, vehicle management, and customer portal with modern UI/UX design.",
+        "technologies": ["Next.js", "React", "Tailwind CSS", "Booking System", "Responsive Design"],
+        "category": "Web Development",
+        "year": "2024",
+        "status": "Live",
+        "link": "https://meninx.vercel.app",
+        "image": "/meninx-car-rental-website-nextjs.jpg",
+        "featured": true,
+        "client": "Meninx Car Rental",
+        "highlights": [
+          "Complete booking system with availability management",
+          "Responsive design optimized for mobile and desktop",
+          "Vehicle management dashboard for administrators",
+          "Customer portal with booking history and preferences",
+          "Modern UI/UX design focused on user experience"
+        ]
+      },
+      {
+        "title": "ASHE - E-commerce with Admin Dashboard",
+        "description": "Full-stack e-commerce website with comprehensive admin dashboard for artisanal products. Developed complete brand identity, product management system, and customer interface using Next.js.",
+        "technologies": ["Next.js", "Admin Dashboard", "E-commerce", "Brand Identity", "Product Management"],
+        "category": "E-commerce & Branding",
+        "year": "2024",
+        "status": "Live",
+        "link": "https://ashe.tn",
+        "image": "/ashe-ecommerce-admin-dashboard-branding.jpg",
+        "featured": true,
+        "client": "ASHE (Own Brand)",
+        "highlights": [
+          "Full e-commerce functionality with product catalog",
+          "Comprehensive admin dashboard for inventory management",
+          "Complete brand identity from concept to implementation",
+          "Payment integration and order management system",
+          "SEO optimization and performance tuning"
+        ]
+      },
+      {
+        "title": "You&Me ",
+        "description": "Modern e-commerce platform for cosmetic products with complete brand identity design. Built with Next.js featuring product catalog, shopping cart, and responsive design optimized for mobile beauty shoppers.",
+        "technologies": ["Next.js", "E-commerce", "Brand Identity", "Mobile Optimization", "Product Catalog"],
+        "category": "E-commerce & Branding",
+        "year": "2024",
+        "status": "Live",
+        "image": "/youme-cosmetic-shop-ecommerce-branding.jpg",
+        "featured": true,
+        "client": "YouMe Cosmetics",
+        "highlights": [
+          "Mobile-first design for beauty product shopping",
+          "Product catalog with advanced filtering and search",
+          "Brand identity design including logo and color palette",
+          "Shopping cart and checkout optimization",
+          "Social media integration for marketing"
+        ]
+      },
+      {
+        "title": "Securinets ENIT - Cybersecurity Club Branding",
+        "description": "Complete visual identity design for ENIT's cybersecurity club including logo design, color schemes, typography, and digital assets for social media and events.",
+        "technologies": ["Adobe Creative Suite", "Logo Design", "Brand Guidelines", "Digital Assets"],
+        "category": "Brand Identity",
+        "year": "2025",
+        "status": "Completed",
+        "image": "/securinets-enit-cybersecurity-club-branding.jpg",
+        "featured": false,
+        "client": "Securinets ENIT",
+        "highlights": [
+          "Complete visual identity system",
+          "Logo design with multiple variations",
+          "Brand guidelines and style guide",
+          "Digital assets for social media",
+          "Event marketing materials"
+        ]
+      },
+      {
+        "title": "Restaurant & Hospitality Brand Collection",
+        "description": "Brand identity projects for multiple hospitality businesses including Chez Monia restaurant, Le Voilier restaurant, and Aqualight Nautic Club. Each featuring unique visual identity and marketing materials.",
+        "technologies": ["Brand Strategy", "Logo Design", "Marketing Materials", "Visual Identity"],
+        "category": "Brand Identity",
+        "year": "2024",
+        "status": "Multiple Completed",
+        "image": "/restaurant-hospitality-brand-collection.jpg",
+        "featured": false,
+        "client": "Multiple Restaurants & Clubs",
+        "highlights": [
+          "Multiple restaurant brand identities",
+          "Unique visual identity for each client",
+          "Marketing materials and menu design",
+          "Consistent brand application across touchpoints",
+          "Print and digital asset creation"
+        ]
+      },
+      {
+        "title": "Event & Lifestyle Brands Portfolio",
+        "description": "Diverse branding projects including REBELE lifestyle brand, Kika Events event management, and various high school and individual client projects. Focus on modern, engaging visual identities.",
+        "technologies": ["Adobe Creative Suite", "Brand Development", "Print Design", "Digital Marketing"],
+        "category": "Brand Identity",
+        "year": "2024",
+        "status": "Multiple Completed",
+        "image": "/event-lifestyle-brands-portfolio.jpg",
+        "featured": false,
+        "client": "Various Clients",
+        "highlights": [
+          "Lifestyle brand development",
+          "Event management branding",
+          "Modern visual identity systems",
+          "Print and digital marketing materials",
+          "Brand strategy consultation"
+        ]
+      },
+      {
+        "title": "Educational Institution Branding",
+        "description": "Brand identity and marketing material design for various high schools and educational institutions. Created cohesive visual systems including logos, promotional materials, and digital assets.",
+        "technologies": ["Educational Design", "Print Materials", "Logo Design", "Marketing Assets"],
+        "category": "Brand Identity",
+        "year": "2023-2024",
+        "status": "Multiple Completed",
+        "image": "/educational-institution-branding-highschool.jpg",
+        "featured": false,
+        "client": "Various High Schools",
+        "highlights": [
+          "Educational institution branding",
+          "Logo and visual identity design",
+          "Promotional and marketing materials",
+          "Digital asset creation",
+          "Brand guideline development"
+        ]
+      },
+      {
+        "title": "Individual Client Projects",
+        "description": "Custom design solutions for individual entrepreneurs and small businesses including personal branding, business cards, social media assets, and promotional materials.",
+        "technologies": ["Personal Branding", "Business Cards", "Social Media Design", "Print Design"],
+        "category": "Personal Branding",
+        "year": "2023-2024",
+        "status": "Ongoing",
+        "image": "/individual-client-personal-branding-projects.jpg",
+        "featured": false,
+        "client": "Individual Entrepreneurs",
+        "highlights": [
+          "Personal branding solutions",
+          "Business card and stationery design",
+          "Social media asset creation",
+          "Promotional material design",
+          "Brand consultation services"
+        ]
+      }
+    ],
+    "services": {
+      "web": {
+        "title": "Web Development",
+        "description": "Next.js, React, E-commerce platforms, Admin dashboards"
+      },
+      "brand": {
+        "title": "Brand Identity",
+        "description": "Logo design, Visual identity, Brand guidelines, Marketing materials"
+      },
+      "industries": {
+        "title": "Industries",
+        "description": "Hospitality, Cosmetics, Events, Education, Automotive, Tech"
+      }
+    },
+    "stats": {
+      "brandProjects": "15+",
+      "webProjects": "8+",
+      "recentClients": [
+        { "name": "Meninx", "industry": "Car Rental" },
+        { "name": "YouMe", "industry": "Cosmetics" },
+        { "name": "Various Restaurants", "industry": "Hospitality" },
+        { "name": "Educational Institutions", "industry": "Schools" }
+      ]
+    }
+  }
+}

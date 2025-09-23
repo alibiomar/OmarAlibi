@@ -64,7 +64,7 @@ export default function HomePage() {
       scaleOnHover
       pauseOnHover={false}
       fadeOut
-      className="-py-10 bg-primary-foreground backdrop-blur-sm  fixed top-0 w-full z-50"
+      className="-py-10 bg-primary-foreground backdrop-blur-sm  fixed top-0 w-full z-30"
       fadeOutColor="#000000"
       ariaLabel="Technology partners"
       />
