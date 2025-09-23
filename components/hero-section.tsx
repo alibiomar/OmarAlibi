@@ -289,7 +289,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
             lightSpread={0.8}
             rayLength={10}
             followMouse={true}
-            fadeDistance={2}
+            fadeDistance={1.5}
             mobileOptimized={false}
             mouseInfluence={0.3}
             noiseAmount={0.3}

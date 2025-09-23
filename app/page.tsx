@@ -64,6 +64,8 @@ export default function HomePage() {
         scaleOnHover
         pauseOnHover={false}
         fadeOut
+                className="p-10 bg-trasparent my-10 absolute w-full z-50"
+
         fadeOutColor="#000000"
         ariaLabel="Technology partners"
       />
