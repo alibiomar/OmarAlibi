@@ -4,6 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Omar Alibi",
+  themeColor: "black",
   icons: {
     icon: "/logo.ico",
   },
