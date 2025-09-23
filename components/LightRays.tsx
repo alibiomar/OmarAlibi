@@ -539,7 +539,7 @@ void main() {
     mobileOptimized
   ]);
 
-  // Enhanced mouse tracking with touch support
+  // Enhanced mouse tracking with touch support - FIXED VERSION
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current || !rendererRef.current) return;
@@ -551,7 +551,17 @@ void main() {
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!containerRef.current || !rendererRef.current) return;
-      e.preventDefault();
+      
+      // Only prevent default if the touch is directly on our element
+      // and not part of a scroll gesture
+      if (e.target && containerRef.current.contains(e.target as Node)) {
+        // Check if this is a single-finger touch (likely interaction, not scroll)
+        if (e.touches.length === 1) {
+          // Don't prevent default to allow scrolling
+          // e.preventDefault();
+        }
+      }
+      
       const touch = e.touches[0];
       const rect = containerRef.current.getBoundingClientRect();
       const x = (touch.clientX - rect.left) / rect.width;
@@ -562,7 +572,8 @@ void main() {
     if (followMouse) {
       window.addEventListener('mousemove', handleMouseMove, { passive: true });
       if (deviceType === 'mobile' || deviceType === 'tablet') {
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        // Make touch events passive to allow scrolling
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
       }
       
       return () => {
@@ -586,7 +597,9 @@ void main() {
         // Prevent content jumping during resize
         contain: 'layout style paint',
         // Ensure rays are visible by preventing overflow clipping
-        position: 'relative'
+        position: 'relative',
+        // IMPORTANT: Ensure touch events don't interfere with scrolling
+        touchAction: 'auto'
       }}
     />
   );
