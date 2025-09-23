@@ -4,7 +4,7 @@ import type { PersonaType } from "@/hooks/use-theme-switcher"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Eye, ChevronDown } from "lucide-react"
+import { ExternalLink, Github, Eye, ChevronDown, Calendar, MapPin, X } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 
@@ -45,6 +45,7 @@ function useLazyLoading() {
 export function ProjectsSection({ persona }: ProjectsSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [showAll, setShowAll] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<any>(null)
   const { loadedImages, observeElement } = useLazyLoading()
 
   useEffect(() => {
@@ -65,153 +66,203 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
 
   const engineerProjects = [
     {
-      title: "Industrial Power Distribution System",
+      title: "IoT Dashboard for Connected Industrial Machines",
       description:
-        "Designed and implemented a 480V power distribution system for a 50,000 sq ft manufacturing facility, including load calculations, panel schedules, and protective device coordination.",
-      technologies: ["AutoCAD", "ETAP", "NEC Compliance", "Load Analysis"],
-      category: "Power Systems",
+        "Developed a comprehensive data acquisition server for industrial machines with real-time web visualization interface, transformed into a standalone desktop application. Implemented WhatsApp alert system and automated consumption report generation with email delivery.",
+      technologies: ["Node.js", "Real-time Dashboard", "WhatsApp API", "Email Automation", "Desktop App", "Industrial IoT"],
+      category: "IoT Systems",
+      year: "2025",
+      status: "Completed",
+      image: "/iot-dashboard-industrial-machines-monitoring.jpg",
+      featured: true,
+      company: "Personal Project"
+    },
+    {
+      title: "Database File Processor - Full-Stack Web Application",
+      description:
+        "Built a complete React + Node.js application for uploading and analyzing multiple file formats (CSV, JSON, Excel, SQLite). Features interactive data visualization with dynamic tables and ChartJS graphs, with optimized memory handling for large files.",
+      technologies: ["React", "Node.js", "ChartJS", "File Processing", "Data Visualization", "Memory Optimization"],
+      category: "Web Development",
+      year: "2025",
+      status: "Completed",
+      image: "/database-file-processor-web-application.jpg",
+      featured: true,
+      company: "Personal Project"
+    },
+    {
+      title: "Data Fusion System for IMU Orientation Sensors",
+      description:
+        "Developed advanced Kalman Filter fusion algorithm for inertial sensors (accelerometers, gyroscopes) implemented on STM32 platform. Created simulation software with Qt Creator and optimized algorithms to minimize orientation estimation errors.",
+      technologies: ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing"],
+      category: "Embedded Systems",
       year: "2024",
       status: "Completed",
-      image: "/industrial-power-distribution-electrical-panel-sys.jpg",
+      image: "/imu-sensor-data-fusion-stm32-kalman.jpg",
       featured: true,
+      company: "ENIT - Academic Project (PFA2)"
     },
     {
-      title: "Solar Microgrid Integration",
+      title: "Real-time ESP32/Firebase Messaging System",
       description:
-        "Developed a 2MW solar microgrid system with battery storage for a commercial campus, including grid-tie capabilities and islanding protection systems.",
-      technologies: ["PVsyst", "HOMER", "IEEE 1547", "SCADA"],
-      category: "Renewable Energy",
-      year: "2023",
-      status: "In Progress",
-      image: "/solar-microgrid-battery-storage-system.jpg",
+        "Built a complete instant messaging system with ESP32 microcontroller integration and Firebase backend. Implemented user authentication, message management, online status tracking, and responsive web interface with enhanced security.",
+      technologies: ["ESP32", "Firebase", "Real-time Database", "Web Interface", "Authentication", "IoT Communication"],
+      category: "IoT Communication",
+      year: "2025",
+      status: "Completed",
+      image: "/esp32-firebase-messaging-system-iot.jpg",
+      featured: false,
+      company: "Personal Project"
+    },
+    {
+      title: "OnWire Link - IoT Firmware & Mobile App",
+      description:
+        "Designed embedded firmware in C++ with web server, MQTT, and WiFiManager. Developed Flutter mobile application with Firebase integration, QR scanning, and hybrid MQTT/local AP control architecture using Raspberry Pi server.",
+      technologies: ["C++ Arduino", "Flutter/Dart", "Firebase", "MQTT", "Express.js", "Raspberry Pi"],
+      category: "Professional IoT",
+      year: "2025",
+      status: "Completed",
+      image: "/onwire-link-iot-firmware-mobile-app.jpg",
       featured: true,
+      company: "OnWire Link - Engineering Internship"
     },
     {
-      title: "Motor Control Center Upgrade",
+      title: "DC Motor Speed Controller with Custom PCB",
       description:
-        "Modernized legacy motor control systems with VFDs and smart monitoring capabilities, resulting in 30% energy savings and improved reliability.",
-      technologies: ["Allen-Bradley", "VFD Programming", "HMI Design", "Ethernet/IP"],
-      category: "Industrial Automation",
-      year: "2023",
-      status: "Completed",
-      image: "/motor-control-center-vfd-industrial-automation.jpg",
-      featured: false,
-    },
-    {
-      title: "Emergency Power System Design",
-      description:
-        "Engineered backup power systems including diesel generators, UPS systems, and automatic transfer switches for critical healthcare facilities.",
-      technologies: ["Generator Sizing", "UPS Design", "ATS Logic", "NFPA 99"],
-      category: "Critical Systems",
-      year: "2022",
-      status: "Completed",
-      image: "/emergency-power-generator-ups-healthcare-facility.jpg",
-      featured: false,
-    },
-    {
-      title: "Smart Grid Communication Network",
-      description:
-        "Implemented advanced metering infrastructure with real-time data collection and analysis for utility-scale smart grid deployment.",
-      technologies: ["AMI", "RF Mesh", "Data Analytics", "Cybersecurity"],
-      category: "Smart Grid",
+        "Complete electronic board design using Eagle PCB software with circuit simulation and optimization using PSpice. Developed voltage regulation system specifically for industrial motor control applications.",
+      technologies: ["Eagle PCB", "PSpice", "Circuit Design", "Voltage Regulation", "Industrial Control", "PCB Design"],
+      category: "Circuit Design",
       year: "2024",
-      status: "In Progress",
-      image: "/smart-grid-communication-network-ami-meters.jpg",
-      featured: false,
-    },
-    {
-      title: "High-Voltage Substation Design",
-      description:
-        "Complete electrical design for 138kV/13.8kV substation including protection schemes, control systems, and SCADA integration.",
-      technologies: ["PSS/E", "Protection Coordination", "SCADA", "IEEE Standards"],
-      category: "Power Systems",
-      year: "2023",
       status: "Completed",
-      image: "/high-voltage-electrical-substation-transformers.jpg",
+      image: "/dc-motor-speed-controller-pcb-design.jpg",
       featured: false,
+      company: "ENIT - Academic Project"
     },
   ]
 
   const freelancerProjects = [
     {
-      title: "TechFlow SaaS Platform",
+      title: "Meninx - Car Rental Platform",
       description:
-        "Complete brand identity and web application design for a project management SaaS. Created a modern, intuitive interface that increased user engagement by 40%.",
-      technologies: ["React", "Next.js", "Figma", "Tailwind CSS"],
+        "Complete web development for a professional car rental company using Next.js. Built responsive booking system, vehicle management, and customer portal with modern UI/UX design.",
+      technologies: ["Next.js", "React", "Tailwind CSS", "Booking System", "Responsive Design"],
       category: "Web Development",
       year: "2024",
       status: "Live",
-      link: "https://techflow.example.com",
-      image: "/modern-saas-dashboard-interface-design.jpg",
+      link: "https://meninx.example.com",
+      image: "/meninx-car-rental-website-nextjs.jpg",
       featured: true,
+      client: "Meninx Car Rental"
     },
     {
-      title: "Artisan Coffee Co. Rebrand",
+      title: "ASHE - E-commerce with Admin Dashboard",
       description:
-        "Full brand redesign including logo, packaging, and digital presence for a local coffee roastery. Developed cohesive visual identity across all touchpoints.",
-      technologies: ["Adobe Creative Suite", "Brand Strategy", "Print Design", "Photography"],
+        "Full-stack e-commerce website with comprehensive admin dashboard for artisanal products. Developed complete brand identity, product management system, and customer interface using Next.js.",
+      technologies: ["Next.js", "Admin Dashboard", "E-commerce", "Brand Identity", "Product Management"],
+      category: "E-commerce & Branding",
+      year: "2024",
+      status: "Live",
+      image: "/ashe-ecommerce-admin-dashboard-branding.jpg",
+      featured: true,
+      client: "ASHE (Own Brand)"
+    },
+    {
+      title: "YouMe Cosmetic Shop",
+      description:
+        "Modern e-commerce platform for cosmetic products with complete brand identity design. Built with Next.js featuring product catalog, shopping cart, and responsive design optimized for mobile beauty shoppers.",
+      technologies: ["Next.js", "E-commerce", "Brand Identity", "Mobile Optimization", "Product Catalog"],
+      category: "E-commerce & Branding",
+      year: "2024",
+      status: "Live",
+      image: "/youme-cosmetic-shop-ecommerce-branding.jpg",
+      featured: true,
+      client: "YouMe Cosmetics"
+    },
+    {
+      title: "Securinets ENIT - Cybersecurity Club Branding",
+      description:
+        "Complete visual identity design for ENIT's cybersecurity club including logo design, color schemes, typography, and digital assets for social media and events.",
+      technologies: ["Adobe Creative Suite", "Logo Design", "Brand Guidelines", "Digital Assets"],
+      category: "Brand Identity",
+      year: "2025",
+      status: "Completed",
+      image: "/securinets-enit-cybersecurity-club-branding.jpg",
+      featured: false,
+      client: "Securinets ENIT"
+    },
+    {
+      title: "Restaurant & Hospitality Brand Collection",
+      description:
+        "Brand identity projects for multiple hospitality businesses including Chez Monia restaurant, Le Voilier restaurant, and Aqualight Nautic Club. Each featuring unique visual identity and marketing materials.",
+      technologies: ["Brand Strategy", "Logo Design", "Marketing Materials", "Visual Identity"],
       category: "Brand Identity",
       year: "2024",
-      status: "Completed",
-      image: "/coffee-brand-packaging-logo-design-artisan.jpg",
-      featured: true,
-    },
-    {
-      title: "EcoTech Mobile App",
-      description:
-        "UI/UX design for a sustainability tracking mobile app. Focused on gamification and user motivation to drive environmental consciousness.",
-      technologies: ["Figma", "Prototyping", "User Research", "Design Systems"],
-      category: "Mobile Design",
-      year: "2023",
-      status: "In Development",
-      image: "/mobile-app-ui-sustainability-eco-green-design.jpg",
+      status: "Multiple Completed",
+      image: "/restaurant-hospitality-brand-collection.jpg",
       featured: false,
+      client: "Multiple Restaurants & Clubs"
     },
     {
-      title: "Portfolio Website Collection",
+      title: "Event & Lifestyle Brands Portfolio",
       description:
-        "Designed and developed custom portfolio websites for creative professionals, each with unique animations and interactive elements.",
-      technologies: ["React", "Framer Motion", "GSAP", "Responsive Design"],
-      category: "Web Development",
-      year: "2023",
-      status: "Multiple Live Sites",
-      image: "/creative-portfolio-website-design-modern.jpg",
-      featured: false,
-    },
-    {
-      title: "Corporate Video Series",
-      description:
-        "Produced and edited a series of corporate training videos with motion graphics, resulting in 60% improvement in employee engagement.",
-      technologies: ["After Effects", "Premiere Pro", "Motion Graphics", "Color Grading"],
-      category: "Video Production",
+        "Diverse branding projects including REBELE lifestyle brand, Kika Events event management, and various high school and individual client projects. Focus on modern, engaging visual identities.",
+      technologies: ["Adobe Creative Suite", "Brand Development", "Print Design", "Digital Marketing"],
+      category: "Brand Identity",
       year: "2024",
-      status: "Completed",
-      image: "/corporate-video-production-motion-graphics.jpg",
+      status: "Multiple Completed",
+      image: "/event-lifestyle-brands-portfolio.jpg",
       featured: false,
+      client: "Various Clients"
     },
     {
-      title: "E-commerce Platform Design",
+      title: "Educational Institution Branding",
       description:
-        "Complete UX/UI redesign of an e-commerce platform, focusing on conversion optimization and mobile-first approach.",
-      technologies: ["Figma", "User Testing", "A/B Testing", "Conversion Optimization"],
-      category: "E-commerce",
-      year: "2023",
-      status: "Live",
-      image: "/ecommerce-website-design-mobile-shopping.jpg",
+        "Brand identity and marketing material design for various high schools and educational institutions. Created cohesive visual systems including logos, promotional materials, and digital assets.",
+      technologies: ["Educational Design", "Print Materials", "Logo Design", "Marketing Assets"],
+      category: "Brand Identity",
+      year: "2023-2024",
+      status: "Multiple Completed",
+      image: "/educational-institution-branding-highschool.jpg",
       featured: false,
+      client: "Various High Schools"
+    },
+    {
+      title: "Individual Client Projects",
+      description:
+        "Custom design solutions for individual entrepreneurs and small businesses including personal branding, business cards, social media assets, and promotional materials.",
+      technologies: ["Personal Branding", "Business Cards", "Social Media Design", "Print Design"],
+      category: "Personal Branding",
+      year: "2023-2024",
+      status: "Ongoing",
+      image: "/individual-client-personal-branding-projects.jpg",
+      featured: false,
+      client: "Individual Entrepreneurs"
     },
   ]
 
   const projects = persona === "engineer" ? engineerProjects : freelancerProjects
-  const sectionTitle = persona === "engineer" ? "Engineering Projects" : "Creative Portfolio"
+  const sectionTitle = persona === "engineer" ? "Technical Projects & Experience" : "Web Development & Brand Identity Portfolio"
   const displayedProjects = showAll ? projects : projects.slice(0, 4)
 
   return (
     <section id="projects-section" className="py-20 px-6 theme-transition">
       <div className="max-w-6xl mx-auto">
-        <h2 className={`text-4xl font-bold mb-12 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+        <h2 className={`text-4xl font-bold mb-4 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
           {sectionTitle}
         </h2>
+        
+        {persona === "engineer" && (
+          <p className={`text-center text-muted-foreground mb-12 max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
+            Electrical Engineering student with expertise in IoT systems, embedded electronics, web development, and industrial automation. 
+            Experienced in both academic research and professional internship projects.
+          </p>
+        )}
+        
+        {persona === "freelancer" && (
+          <p className={`text-center text-muted-foreground mb-12 max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
+            Full-stack web developer and brand designer specializing in Next.js development and comprehensive brand identity solutions. 
+            Experienced in e-commerce platforms, business websites, and complete branding packages for diverse industries.
+          </p>
+        )}
 
         <div className="grid md:grid-cols-2 gap-8">
           {displayedProjects.map((project, index) => (
@@ -240,6 +291,11 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                     size="sm"
                     variant="secondary"
                     className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      setSelectedProject(project)
+                    }}
                   >
                     <Eye className="w-4 h-4 mr-2" />
                     View Details
@@ -253,6 +309,15 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                     </Badge>
                   </div>
                 )}
+
+                {persona === "engineer" && "company" in project && (
+                  <div className="absolute top-4 right-4">
+                    <Badge variant="outline" className="bg-black/20 text-white border-white/30 backdrop-blur-sm">
+                      {"company" in project && project.company?.includes("Professional") ? "Professional" : 
+                       "company" in project && project.company?.includes("Internship") ? "Internship" : "Academic"}
+                    </Badge>
+                  </div>
+                )}
               </div>
 
               <CardHeader>
@@ -260,9 +325,27 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                   <Badge variant="secondary" className="mb-2">
                     {project.category}
                   </Badge>
-                  <span className="text-sm text-muted-foreground">{project.year}</span>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    <Calendar className="w-3 h-3" />
+                    {project.year}
+                  </div>
                 </div>
-                <CardTitle className="text-xl mb-2">{project.title}</CardTitle>
+                <CardTitle className="text-xl mb-2 leading-tight">{project.title}</CardTitle>
+                
+                {persona === "freelancer" && "client" in project && (
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground mb-2">
+                    <MapPin className="w-3 h-3" />
+                    {"client" in project && project.client}
+                  </div>
+                )}
+                
+                {persona === "engineer" && "company" in project && (
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground mb-2">
+                    <MapPin className="w-3 h-3" />
+                    {"company" in project && project.company}
+                  </div>
+                )}
+                
                 <div className="flex items-center gap-2">
                   <Badge
                     variant={project.status === "Completed" || project.status === "Live" ? "default" : "outline"}
@@ -272,12 +355,13 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                   </Badge>
                 </div>
               </CardHeader>
+              
               <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+                <p className="text-muted-foreground mb-4 leading-relaxed text-sm">{project.description}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.technologies.map((tech) => (
-                    <span key={tech} className="px-2 py-1 bg-muted text-muted-foreground rounded text-xs hover-lift">
+                    <span key={tech} className="px-2 py-1 bg-muted text-muted-foreground rounded-full text-xs hover-lift transition-colors hover:bg-primary/10">
                       {tech}
                     </span>
                   ))}
@@ -289,10 +373,43 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Live
                     </Button>
-                    <Button variant="ghost" size="sm" className="hover-lift">
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="hover-lift" 
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setSelectedProject(project)
+                      }}
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Details
                     </Button>
+                  </div>
+                )}
+
+                {persona === "engineer" && (
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="hover-lift bg-transparent">
+                      <Github className="w-4 h-4 mr-2" />
+                      Source Code
+                    </Button>
+                    {index < 2 && (
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="hover-lift" 
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          setSelectedProject(project)
+                        }}
+                      >
+                        <Eye className="w-4 h-4 mr-2" />
+                        Details
+                      </Button>
+                    )}
                   </div>
                 )}
               </CardContent>
@@ -317,28 +434,308 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
         )}
 
         {persona === "engineer" && (
-          <div className={`mt-12 text-center ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
-            <Card className="max-w-2xl mx-auto theme-transition hover-lift">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4">Professional Certifications</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
-                      <span className="text-primary font-bold">PE</span>
+          <div className={`mt-16 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Technical Skills Highlight */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Core Technical Skills</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">Embedded Systems</h4>
+                      <p className="text-sm text-muted-foreground">Arduino, ESP32/8266, STM32, Raspberry Pi, BeagleBone, FPGA, PCB Design</p>
                     </div>
-                    <p className="text-sm font-medium">Professional Engineer</p>
-                    <p className="text-xs text-muted-foreground">California</p>
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">Web & Software</h4>
+                      <p className="text-sm text-muted-foreground">React, Next.js, Node.js, Python, Flutter, C/C++, Rust</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">IoT & Industrial</h4>
+                      <p className="text-sm text-muted-foreground">MQTT, Industrial Automation, Real-time Systems</p>
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
-                      <span className="text-primary font-bold">CEM</span>
+                </CardContent>
+              </Card>
+
+              {/* Academic & Professional Info */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Academic Background</h3>
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3 pulse-glow">
+                        <span className="text-primary font-bold text-lg">ENIT</span>
+                      </div>
+                      <p className="font-medium">Electrical Engineering</p>
+                      <p className="text-sm text-muted-foreground">National Engineering School of Tunis</p>
+                      <p className="text-xs text-muted-foreground mt-1">2023 - Present</p>
                     </div>
-                    <p className="text-sm font-medium">Certified Energy Manager</p>
-                    <p className="text-xs text-muted-foreground">AEE</p>
+                    <div className="pt-4 border-t">
+                      <h4 className="font-medium mb-2 text-center">Professional Experience</h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span>OnWire Link</span>
+                          <span className="text-muted-foreground">Engineering Intern</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>STEG</span>
+                          <span className="text-muted-foreground">Technical Intern</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>ASHE</span>
+                          <span className="text-muted-foreground">Founder & Manager</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Project Details Modal */}
+        {selectedProject && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
+            <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto theme-transition" onClick={(e) => e.stopPropagation()}>
+              <div className="relative">
+                <div className="h-64 md:h-80 overflow-hidden rounded-t-lg">
+                  <Image
+                    src={selectedProject.image || "/placeholder.svg"}
+                    alt={selectedProject.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    className="absolute top-4 right-4"
+                    onClick={() => setSelectedProject(null)}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                  {selectedProject.featured && (
+                    <div className="absolute top-4 left-4">
+                      <Badge className={`${persona === "engineer" ? "bg-blue-500" : "bg-green-500"} text-white`}>
+                        Featured
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="p-8">
+                  <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                    <div>
+                      <h2 className="text-3xl font-bold mb-2">{selectedProject.title}</h2>
+                      <div className="flex items-center gap-4 text-muted-foreground">
+                        <Badge variant="secondary">{selectedProject.category}</Badge>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {selectedProject.year}
+                        </div>
+                        {((persona === "engineer" && "company" in selectedProject) || (persona === "freelancer" && "client" in selectedProject)) && (
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" />
+                            {persona === "engineer" && "company" in selectedProject ? selectedProject.company : 
+                             persona === "freelancer" && "client" in selectedProject ? selectedProject.client : ""}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <Badge
+                      variant={selectedProject.status === "Completed" || selectedProject.status === "Live" ? "default" : "outline"}
+                    >
+                      {selectedProject.status}
+                    </Badge>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Project Overview</h3>
+                      <p className="text-muted-foreground leading-relaxed">{selectedProject.description}</p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Technologies Used</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProject.technologies.map((tech: string) => (
+                          <span key={tech} className="px-3 py-2 bg-muted text-muted-foreground rounded-full text-sm hover-lift transition-colors hover:bg-primary/10">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {persona === "engineer" && (
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">Technical Details</h3>
+                        <div className="bg-muted/50 rounded-lg p-4">
+                          {selectedProject.title.includes("IoT Dashboard") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Real-time data acquisition from industrial machines</li>
+                              <li>• Web-based visualization interface with responsive design</li>
+                              <li>• Desktop application conversion for offline usage</li>
+                              <li>• WhatsApp integration for instant alerts and notifications</li>
+                              <li>• Automated report generation with email delivery system</li>
+                            </ul>
+                          )}
+                          {selectedProject.title.includes("Database File Processor") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Support for CSV, JSON, Excel, and SQLite file formats</li>
+                              <li>• Memory-optimized processing for large files using streaming</li>
+                              <li>• Interactive data visualization with ChartJS integration</li>
+                              <li>• Dynamic filtering and export capabilities</li>
+                              <li>• Asynchronous file reading for improved performance</li>
+                            </ul>
+                          )}
+                          {selectedProject.title.includes("Data Fusion System") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Advanced Kalman Filter implementation for sensor fusion</li>
+                              <li>• STM32 embedded platform optimization</li>
+                              <li>• Qt Creator simulation environment</li>
+                              <li>• Real-time orientation estimation with error minimization</li>
+                              <li>• IMU sensor integration (accelerometers, gyroscopes)</li>
+                            </ul>
+                          )}
+                          {!selectedProject.title.includes("IoT Dashboard") && !selectedProject.title.includes("Database File Processor") && !selectedProject.title.includes("Data Fusion System") && (
+                            <p className="text-sm text-muted-foreground">Detailed technical specifications and implementation details available upon request.</p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {persona === "freelancer" && (
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">Project Highlights</h3>
+                        <div className="bg-muted/50 rounded-lg p-4">
+                          {selectedProject.title.includes("Meninx") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Complete booking system with availability management</li>
+                              <li>• Responsive design optimized for mobile and desktop</li>
+                              <li>• Vehicle management dashboard for administrators</li>
+                              <li>• Customer portal with booking history and preferences</li>
+                              <li>• Modern UI/UX design focused on user experience</li>
+                            </ul>
+                          )}
+                          {selectedProject.title.includes("ASHE") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Full e-commerce functionality with product catalog</li>
+                              <li>• Comprehensive admin dashboard for inventory management</li>
+                              <li>• Complete brand identity from concept to implementation</li>
+                              <li>• Payment integration and order management system</li>
+                              <li>• SEO optimization and performance tuning</li>
+                            </ul>
+                          )}
+                          {selectedProject.title.includes("YouMe") && (
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li>• Mobile-first design for beauty product shopping</li>
+                              <li>• Product catalog with advanced filtering and search</li>
+                              <li>• Brand identity design including logo and color palette</li>
+                              <li>• Shopping cart and checkout optimization</li>
+                              <li>• Social media integration for marketing</li>
+                            </ul>
+                          )}
+                          {!selectedProject.title.includes("Meninx") && !selectedProject.title.includes("ASHE") && !selectedProject.title.includes("YouMe") && (
+                            <p className="text-sm text-muted-foreground">Custom design solutions tailored to client needs and industry requirements.</p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-3 pt-4 border-t">
+                      {persona === "freelancer" && "link" in selectedProject && (
+                        <Button className="hover-lift">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          View Live Site
+                        </Button>
+                      )}
+                      <Button variant="outline" className="hover-lift">
+                        <Github className="w-4 h-4 mr-2" />
+                        Source Code
+                      </Button>
+                      <Button variant="ghost" onClick={() => setSelectedProject(null)}>
+                        Close
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {persona === "freelancer" && (
+          <div className={`mt-16 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Services Offered */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Services Offered</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">Web Development</h4>
+                      <p className="text-sm text-muted-foreground">Next.js, React, E-commerce platforms, Admin dashboards</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">Brand Identity</h4>
+                      <p className="text-sm text-muted-foreground">Logo design, Visual identity, Brand guidelines, Marketing materials</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">Industries</h4>
+                      <p className="text-sm text-muted-foreground">Hospitality, Cosmetics, Events, Education, Automotive, Tech</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Client Types & Stats */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Client Portfolio</h3>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
+                          <span className="text-primary font-bold">15+</span>
+                        </div>
+                        <p className="text-sm font-medium">Brand Projects</p>
+                        <p className="text-xs text-muted-foreground">Completed</p>
+                      </div>
+                      <div>
+                        <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
+                          <span className="text-primary font-bold">8+</span>
+                        </div>
+                        <p className="text-sm font-medium">Web Projects</p>
+                        <p className="text-xs text-muted-foreground">Live Sites</p>
+                      </div>
+                    </div>
+                    <div className="pt-4 border-t">
+                      <h4 className="font-medium mb-3 text-center">Recent Clients</h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between">
+                          <span>Meninx</span>
+                          <span className="text-muted-foreground">Car Rental</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>YouMe</span>
+                          <span className="text-muted-foreground">Cosmetics</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Various Restaurants</span>
+                          <span className="text-muted-foreground">Hospitality</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Educational Institutions</span>
+                          <span className="text-muted-foreground">Schools</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         )}
       </div>
