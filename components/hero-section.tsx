@@ -305,12 +305,12 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Sticky Persona Switcher - Top of screen on mobile/tablet */}
+      {/* Sticky Persona Switcher - Top of screen on mobile/tablet
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 lg:hidden">
         <div className={`scale-75 -mt-5 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}>
           <IntegratedPersonaSwitcher persona={persona} onToggle={onTogglePersona} />
         </div>
-      </div>
+      </div> */}
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-center py-5">
@@ -344,7 +344,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                   
                   {/* Image next to name on mobile/tablet */}
                   <div className="lg:hidden flex-shrink-0">
-                    <div className="relative w-28 h-28 sm:w-20 sm:h-20 md:w-24 md:h-24">
+                    <div className="fixed top-0 right-0 w-28 h-28 sm:w-20 sm:h-20 md:w-24 md:h-24">
                       <Image 
                         src={persona === "engineer" ? me : he} 
                         alt="Profile Picture" 
@@ -411,7 +411,9 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
             </div>
 
             {/* Social Links - Bottom on mobile, moved here */}
-            <div className="flex gap-4 justify-center sm:justify-start lg:hidden pt-4">
+            <div className="flex  flex-col gap-10 pt-5 lg:hidden ">
+                  <IntegratedPersonaSwitcher persona={persona} onToggle={onTogglePersona} />
+                  <div className="flex gap-4 justify-center lg:justify-start z-20">
               {[
                 { icon: Github, href: "https://github.com/omaralibi", label: "GitHub" },
                 { icon: Linkedin, href: "https://linkedin.com/in/omar-alibi", label: "LinkedIn" },
@@ -426,7 +428,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                 >
                   <Icon className="w-5 h-5" />
                 </Button>
-              ))}
+              ))}</div>
             </div>
           </div>
 
