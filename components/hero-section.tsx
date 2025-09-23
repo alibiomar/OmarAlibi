@@ -106,28 +106,30 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
   return (
     <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 theme-transition relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden ">
-        <div
-                    className={`fixed m-10 z-10  self-center sm:self-auto transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                  >
-                  </div>
-        <div className="absolute inset-0 " />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+  <div
+    className={`fixed m-10 z-10 self-center sm:self-auto transition-all duration-1000 ${
+      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+    }`}
+  >
+  </div>
 
-            <div className="inset-0 w-full absolute">
-                   <LightRays
-    raysOrigin="top-left"
-    raysColor={persona === "engineer" ?"#00ffff":"#ff00ff"}
-    raysSpeed={1.5}
-    lightSpread={0.8}
-    rayLength={3}
-    followMouse={true}
+  <div className="inset-0 w-full absolute pointer-events-none">
+    <LightRays
+      raysOrigin="top-left"
+      raysColor={persona === "engineer" ? "#00ffff" : "#ff00ff"}
+      raysSpeed={1.5}
+      lightSpread={0.8}
+      rayLength={3}
+      followMouse={true}
       mobileOptimized={true}
-
-    mouseInfluence={0.5}
-    noiseAmount={0.3}
-    distortion={0.01}
-  />
-            </div>
-        </div>
+      mouseInfluence={0.5}
+      noiseAmount={0.3}
+      distortion={0.01}
+    />
+  </div>
+</div>
+</div>
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
        
