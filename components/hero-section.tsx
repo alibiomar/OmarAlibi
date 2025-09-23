@@ -113,8 +113,9 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
     }`}
   >
   </div>
+<div className="absolute inset-0 pointer-events-none touch-auto" aria-hidden="true">
 
-  <div className="inset-0 w-full absolute pointer-events-none">
+  <div className="absolute inset-0 w-full h-full pointer-events-none touch-pan-y" aria-hidden="true">
     <LightRays
       raysOrigin="top-left"
       raysColor={persona === "engineer" ? "#00ffff" : "#ff00ff"}
@@ -130,6 +131,8 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
   </div>
 </div>
 </div>
+</div>
+
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
        
