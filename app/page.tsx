@@ -44,7 +44,7 @@ const techLogos = [
   { node: <SiAdobeaftereffects />, title: "After Effects" },
   { src: "/icons/questasim.svg", alt: "QuestaSim" },
     { src: "/icons/ltspice.svg", alt: "LTSpice" },
-    { src: "/icons/eaglePCB.svg", alt: "EaglePCB" },
+    { src: "/icons/eaglepcb.svg", alt: "EaglePCB" },
     
 ];
 
