@@ -25,7 +25,7 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
   const SLIDER_WIDTH = 80; // 20rem = 80px
   const BUTTON_WIDTH = 24; // 6rem = 24px
   const PADDING = 4; // 1rem = 4px (top-1)
-  const MAX_OFFSET = SLIDER_WIDTH - BUTTON_WIDTH - (PADDING * 2);
+  const MAX_OFFSET = SLIDER_WIDTH - BUTTON_WIDTH - PADDING ;
 
   const handleStart = (clientX: number) => {
     if (!sliderRef.current) return;
@@ -86,7 +86,7 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
     }
     
     setIsDragging(false);
-    setDragOffset(0);
+    //setDragOffset(0);
     setVelocity(0);
   };
 
@@ -96,19 +96,11 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
     handleStart(e.clientX);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    handleMove(e.clientX);
-  };
 
   // Touch events
   const handleTouchStart = (e: React.TouchEvent) => {
     e.preventDefault();
     handleStart(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    e.preventDefault();
-    handleMove(e.touches[0].clientX);
   };
 
   // Global event listeners for smooth dragging
@@ -157,10 +149,10 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
     
     const clampedProgress = Math.max(0, Math.min(1, progress));
     const opacity = 0.1 + (clampedProgress * 0.2); // Subtle gradient change
-    
-    return `linear-gradient(90deg, 
-      rgba(59, 130, 246, ${0.3 - clampedProgress * 0.1}) 0%, 
-      rgba(147, 51, 234, ${opacity}) 100%)`;
+
+    return `linear-gradient(${persona === "engineer" ? '270deg' : '90deg'}, 
+      rgba(0, 0, 0, ${0.3 - clampedProgress * 0.1}) 0%, 
+      rgba(255, 255, 255, ${opacity}) 100%)`;
   };
 
   return (
@@ -177,16 +169,16 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
           
           <div 
             ref={sliderRef}
-            className="relative w-20 h-8 rounded-2xl border  border-white/10 select-none overflow-hidden"
+            className="relative w-20 h-8 rounded-2xl border  border-foreground/30 select-none "
             style={{ 
               background: getBackgroundGradient(),
-              boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.2)'
+              boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.3)'
             }}
           >
             {/* Track glow effect */}
             <div 
               className={`absolute inset-0 rounded-2xl transition-all duration-700 ${
-                isDragging ? 'bg-white/5' : ''
+                isDragging ? 'bg-white/15' : ''
               }`} 
             />
             
@@ -291,26 +283,22 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
       <div className="absolute inset-0 overflow-hidden">
         <div className="inset-0 w-full absolute">
           <LightRays
-            raysOrigin="top-left"
-            raysColor={persona === "engineer" ?"#00ffff":"#ff00ff"}
-            raysSpeed={1.5}
+            raysOrigin="top-center"
+            raysColor={persona === "engineer" ?"#00ffff":"#ff004f"}
+            raysSpeed={2}
             lightSpread={0.8}
-            rayLength={3}
+            rayLength={10}
             followMouse={true}
+            fadeDistance={2}
             mobileOptimized={false}
-            mouseInfluence={0.5}
+            mouseInfluence={0.3}
             noiseAmount={0.3}
             distortion={0.01}
           />
         </div>
       </div>
 
-      {/* Sticky Persona Switcher - Top of screen on mobile/tablet
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-40 lg:hidden">
-        <div className={`scale-75 -mt-5 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}`}>
-          <IntegratedPersonaSwitcher persona={persona} onToggle={onTogglePersona} />
-        </div>
-      </div> */}
+
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-center py-5">
@@ -397,7 +385,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                 <ArrowDown className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <Button
-                onClick={() => window.open('/Omar_Alibi_Resume.pdf', 'download')}
+                onClick={() => window.open('/Omar_Alibi_Resume.pdf', '_blank')}
                 size="lg"
                 className="text-base sm:text-lg px-6 text-white/50 sm:px-10 py-4 sm:py-7 glass-button hover-lift transition-all duration-300 w-full sm:w-auto"
               >
