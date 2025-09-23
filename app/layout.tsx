@@ -22,6 +22,7 @@ export default function RootLayout({
       <body className="dark font-sans">
         <Navbar />
         {children}
+        
       </body>
     </html>
   );
