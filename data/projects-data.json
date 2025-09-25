@@ -6,29 +6,31 @@
       {
         "title": "IoT Dashboard for Connected Industrial Machines",
         "description": "Developed a comprehensive data acquisition server for industrial machines with real-time web visualization interface, transformed into a standalone desktop application. Implemented WhatsApp alert system and automated consumption report generation with email delivery.",
-        "technologies": ["Node.js", "Real-time Dashboard", "WhatsApp API", "Email Automation", "Desktop App", "Industrial IoT"],
+        "technologies": ["Electronjs", "Real-time Dashboard", "Twilio API", "Email Automation", "Desktop App", "Industrial IoT"],
         "category": "IoT Systems",
         "year": "2025",
         "status": "Completed",
-        "image": "/iot-dashboard-industrial-machines-monitoring.jpg",
+        "image": "/projects/engineer/iot-dashboard-industrial-machines-monitoring.jpg",
         "featured": true,
-        "company": "Personal Project",
+        "company": "ENIT - Academic Project",
         "technicalDetails": [
           "Real-time data acquisition from industrial machines",
           "Web-based visualization interface with responsive design",
           "Desktop application conversion for offline usage",
-          "WhatsApp integration for instant alerts and notifications",
+          "JWT authentication and secure access",
+          "Configuration management for user preference modifications",
+          "WhatsApp integration for instant alerts and notifications using Twilio API",
           "Automated report generation with email delivery system"
         ]
       },
       {
         "title": "Database File Processor - Full-Stack Web Application",
-        "description": "Built a complete React + Node.js application for uploading and analyzing multiple file formats (CSV, JSON, Excel, SQLite). Features interactive data visualization with dynamic tables and ChartJS graphs, with optimized memory handling for large files.",
-        "technologies": ["React", "Node.js", "ChartJS", "File Processing", "Data Visualization", "Memory Optimization"],
-        "category": "Web Development",
+        "description": "Built a complete React + Node.js application and hosted on a Raspberry Pi for uploading and analyzing multiple file formats (CSV, JSON, Excel, SQLite). Features interactive data visualization with dynamic tables and ChartJS graphs, with optimized memory handling for large files.",
+        "technologies": ["React", "Node.js", "ChartJS", "File Processing", "Data Visualization", "Memory Optimization", "Raspberry Pi"],
+        "category": "Web Development" ,
         "year": "2025",
         "status": "Completed",
-        "image": "/database-file-processor-web-application.jpg",
+        "image": "/projects/engineer/database-file-processor-web-application.jpg",
         "featured": true,
         "company": "Personal Project",
         "technicalDetails": [
@@ -36,17 +38,21 @@
           "Memory-optimized processing for large files using streaming",
           "Interactive data visualization with ChartJS integration",
           "Dynamic filtering and export capabilities",
-          "Asynchronous file reading for improved performance"
+          "Asynchronous file reading for improved performance",
+          "Raspberry Pi hosting for low-cost deployment",
+          "User authentication and secure file management",
+          "Responsive design for accessibility on various devices",
+          "Symbolic link for config file to persist centralized settings between frontend and backend"
         ]
       },
       {
         "title": "Data Fusion System for IMU Orientation Sensors",
-        "description": "Developed advanced Kalman Filter fusion algorithm for inertial sensors (accelerometers, gyroscopes) implemented on STM32 platform. Created simulation software with Qt Creator and optimized algorithms to minimize orientation estimation errors.",
-        "technologies": ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing"],
+        "description": "Implemented a flight control system on STM32 leveraging accelerometers and gyroscopes for inertial sensing. Integrated a Kalman filter for sensor fusion with a magnetometer, enabling accurate real-time orientation estimation and correction and built simulation desktop application with Qt Creator and C++ to visualize the drone's behavior.",
+        "technologies": ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing",  "Sensor Fusion", "Inno Setup"],
         "category": "Embedded Systems",
         "year": "2024",
         "status": "Completed",
-        "image": "/imu-sensor-data-fusion-stm32-kalman.jpg",
+        "image": "/projects/engineer/imu-sensor-data-fusion-stm32-kalman.jpg",
         "featured": true,
         "company": "ENIT - Academic Project (PFA2)",
         "technicalDetails": [
@@ -54,7 +60,8 @@
           "STM32 embedded platform optimization",
           "Qt Creator simulation environment",
           "Real-time orientation estimation with error minimization",
-          "IMU sensor integration (accelerometers, gyroscopes)"
+          "IMU sensor integration (accelerometers, gyroscopes)",
+          "Inno Setup for Windows application packaging"
         ]
       },
       {
@@ -64,7 +71,7 @@
         "category": "IoT Communication",
         "year": "2025",
         "status": "Completed",
-        "image": "/esp32-firebase-messaging-system-iot.jpg",
+        "image": "/projects/engineer/esp32-firebase-messaging-system-iot.jpg",
         "featured": false,
         "company": "Personal Project",
         "technicalDetails": [
@@ -82,7 +89,7 @@
         "category": "Professional IoT",
         "year": "2025",
         "status": "Completed",
-        "image": "/onwire-link-iot-firmware-mobile-app.jpg",
+        "image": "/projects/engineer/onwire-link-iot-firmware-mobile-app.jpg",
         "featured": true,
         "company": "OnWire Link - Engineering Internship",
         "technicalDetails": [
@@ -100,7 +107,7 @@
         "category": "Circuit Design",
         "year": "2024",
         "status": "Completed",
-        "image": "/dc-motor-speed-controller-pcb-design.jpg",
+        "image": "/projects/engineer/dc-motor-speed-controller-pcb-design.jpg",
         "featured": false,
         "company": "ENIT - Academic Project",
         "technicalDetails": [

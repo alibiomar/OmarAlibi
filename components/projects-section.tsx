@@ -416,31 +416,39 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
     <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto theme-transition" onClick={(e) => e.stopPropagation()}>
       <div className="relative">
-        <div className="h-64 md:h-80 overflow-hidden rounded-t-lg">
-          <Image
-            src={selectedProject.image || "/placeholder.svg"}
-            alt={selectedProject.title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 80vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <Button
-            variant="secondary"
-            size="sm"
-            className="absolute top-4 right-4"
-            onClick={() => setSelectedProject(null)}
-          >
-            <X className="w-4 h-4" />
-          </Button>
-          {selectedProject.featured && (
-            <div className="absolute top-4 left-4">
-              <Badge className={`${persona === "engineer" ? "bg-blue-500" : "bg-green-500"} text-white`}>
-                Featured
-              </Badge>
-            </div>
-          )}
-        </div>
+        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-lg">
+  <Image
+    src={selectedProject.image || "/placeholder.svg"}
+    alt={selectedProject.title}
+    fill
+    className="object-cover"
+    sizes="(max-width: 768px) 100vw, 80vw"
+    priority
+  />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+  <Button
+    variant="secondary"
+    size="sm"
+    className="absolute top-4 right-4"
+    onClick={() => setSelectedProject(null)}
+  >
+    <X className="w-4 h-4" />
+  </Button>
+
+  {selectedProject.featured && (
+    <div className="absolute top-4 left-4">
+      <Badge
+        className={`${
+          persona === "engineer" ? "bg-blue-500" : "bg-green-500"
+        } text-white`}
+      >
+        Featured
+      </Badge>
+    </div>
+  )}
+</div>
+
         
         <div className="p-8">
           <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
@@ -490,7 +498,7 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
               {( selectedProject.link) && (
                 <Button 
                   variant="outline" 
-                  className="hover-lift" 
+                  className=" z-50 cursor-pointer" 
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
