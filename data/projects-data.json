@@ -4,6 +4,58 @@
     "description": "Electrical Engineering student with expertise in IoT systems, embedded electronics, web development, and industrial automation. Experienced in both academic research and professional internship projects.",
     "projects": [
       {
+  "title": "OnWire Link - IoT Firmware & Mobile App",
+  "description": "Developed a complete IoT ecosystem during an engineering internship, including embedded firmware for ESP8266-based smart switches, a cross-platform Flutter mobile app, and complementary tools for provisioning, monitoring, and data analysis. The system integrates hybrid online/offline control, secure authentication, and automated scheduling with solar integration.",
+  "technologies": [
+    "C++ (ESP8266/Arduino)",
+    "Flutter/Dart",
+    "Firebase Authentication & Firestore",
+    "MQTT & HTTP/HTTPS",
+    "Express.js",
+    "Node.js",
+    "React",
+    "Python/Eel",
+    "Raspberry Pi 5"
+  ],
+  "category": "Professional IoT",
+  "year": "2025",
+  "status": "Completed",
+  "image": "/projects/engineer/onwire-link-iot-firmware-mobile-app.jpg",
+  "featured": true,
+  "company": "OnWire Link - Engineering Internship",
+  "technicalDetails": [
+    "Firmware developed for ESP8266 with modular architecture (configuration, communication, scheduler, monitoring, offline fallback)",
+    "Optimizations for memory, deep sleep power saving, and secure TLS/HTTPS communication",
+    "Mobile app built with Flutter using MVVM architecture, supporting real-time MQTT control and offline AP-based mode",
+    "Provisioning via QR code scanning, with guided setup and error handling",
+    "Automated scheduling including solar-based control (sunrise/sunset)",
+    "Secure authentication and cloud sync via Firebase Authentication and Firestore",
+    "Complementary applications:",
+    " • QR Code Generator (Python/Eel) – generates unique provisioning codes with SSID, password, MQTT credentials, and exports as printable PDFs",
+    " • Switcher Life Checker (Web/React) – monitors device availability in real time via MQTT, provides dashboard and alerts (email/push)",
+    " • Database File Processor (React/Node.js on Raspberry Pi 5) – processes CSV/JSON/Excel/SQLite, offers metadata extraction, filtering, visualization, batch analysis, and secure handling"
+  ]
+},
+            {
+        "title": "Data Fusion System for IMU Orientation Sensors",
+        "description": "Implemented a flight control system on STM32 leveraging accelerometers and gyroscopes for inertial sensing. Integrated a Kalman filter for sensor fusion with a magnetometer, enabling accurate real-time orientation estimation and correction and built simulation desktop application with Qt Creator and C++ to visualize the drone's behavior.",
+        "technologies": ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing",  "Sensor Fusion", "Inno Setup"],
+        "category": "Embedded Systems",
+        "year": "2024",
+        "status": "Completed",
+        "image": "/projects/engineer/imu-sensor-data-fusion-stm32-kalman.jpg",
+        "featured": true,
+        "company": "ENIT - Academic Project (PFA2)",
+        "technicalDetails": [
+          "Advanced Kalman Filter implementation for sensor fusion",
+          "STM32 embedded platform optimization",
+          "Qt Creator simulation environment",
+          "Real-time orientation estimation with error minimization",
+          "IMU sensor integration (accelerometers, gyroscopes)",
+          "Inno Setup for Windows application packaging"
+        ]
+      },
+            {
         "title": "IoT Dashboard for Connected Industrial Machines",
         "description": "Developed a comprehensive data acquisition server for industrial machines with real-time web visualization interface, transformed into a standalone desktop application. Implemented WhatsApp alert system and automated consumption report generation with email delivery.",
         "technologies": ["Electronjs", "Real-time Dashboard", "Twilio API", "Email Automation", "Desktop App", "Industrial IoT"],
@@ -45,25 +97,7 @@
           "Symbolic link for config file to persist centralized settings between frontend and backend"
         ]
       },
-      {
-        "title": "Data Fusion System for IMU Orientation Sensors",
-        "description": "Implemented a flight control system on STM32 leveraging accelerometers and gyroscopes for inertial sensing. Integrated a Kalman filter for sensor fusion with a magnetometer, enabling accurate real-time orientation estimation and correction and built simulation desktop application with Qt Creator and C++ to visualize the drone's behavior.",
-        "technologies": ["STM32", "Kalman Filter", "Qt Creator", "C++", "IMU Sensors", "Real-time Processing",  "Sensor Fusion", "Inno Setup"],
-        "category": "Embedded Systems",
-        "year": "2024",
-        "status": "Completed",
-        "image": "/projects/engineer/imu-sensor-data-fusion-stm32-kalman.jpg",
-        "featured": true,
-        "company": "ENIT - Academic Project (PFA2)",
-        "technicalDetails": [
-          "Advanced Kalman Filter implementation for sensor fusion",
-          "STM32 embedded platform optimization",
-          "Qt Creator simulation environment",
-          "Real-time orientation estimation with error minimization",
-          "IMU sensor integration (accelerometers, gyroscopes)",
-          "Inno Setup for Windows application packaging"
-        ]
-      },
+
       {
         "title": "Real-time ESP32/Firebase Messaging System",
         "description": "Built a complete instant messaging system with ESP32 microcontroller integration and Firebase backend. Implemented user authentication, message management, online status tracking, and responsive web interface with enhanced security.",
@@ -82,24 +116,7 @@
           "Responsive web interface with security features"
         ]
       },
-      {
-        "title": "OnWire Link - IoT Firmware & Mobile App",
-        "description": "Designed embedded firmware in C++ with web server, MQTT, and WiFiManager. Developed Flutter mobile application with Firebase integration, QR scanning, and hybrid MQTT/local AP control architecture using Raspberry Pi server.",
-        "technologies": ["C++ Arduino", "Flutter/Dart", "Firebase", "MQTT", "Express.js", "Raspberry Pi"],
-        "category": "Professional IoT",
-        "year": "2025",
-        "status": "Completed",
-        "image": "/projects/engineer/onwire-link-iot-firmware-mobile-app.jpg",
-        "featured": true,
-        "company": "OnWire Link - Engineering Internship",
-        "technicalDetails": [
-          "Embedded firmware development in C++ for IoT devices",
-          "Flutter mobile application with Firebase integration",
-          "QR code scanning for device pairing",
-          "MQTT protocol implementation for device communication",
-          "Raspberry Pi server setup with Express.js backend"
-        ]
-      },
+
       {
         "title": "DC Motor Speed Controller with Custom PCB",
         "description": "Complete electronic board design using Eagle PCB software with circuit simulation and optimization using PSpice. Developed voltage regulation system specifically for industrial motor control applications.",
