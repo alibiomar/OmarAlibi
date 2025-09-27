@@ -2,7 +2,80 @@
   "engineer": {
     "sectionTitle": "Technical Projects & Experience",
     "description": "Electrical Engineering student with expertise in IoT systems, embedded electronics, web development, and industrial automation. Experienced in both academic research and professional internship projects.",
-    "projects": [
+    "projects": [{
+  "title": "VLSI Design - Programmable VGA Circuit for Biomedical Applications",
+  "description": "Designed and implemented a low-power programmable Variable Gain Amplifier (VGA) circuit in VLSI technology for biomedical signal acquisition systems. The project focused on creating an energy-efficient analog front-end capable of processing bio-potential signals (EMG, EOG) with digitally controlled gain and optimized performance for Wireless Body Area Networks (WBAN).",
+  "technologies": [
+    "VLSI Design",
+    "CMOS 180nm TSMC Technology",
+    "Analog Circuit Design",
+    "VHDL-AMS/Verilog-A",
+    "Cadence Virtuoso",
+    "SPICE Simulation",
+    "Layout Design & DRC/LVS",
+    "Low-Power Design Techniques"
+  ],
+  "category": "VLSI/Microelectronics",
+  "year": "2026",
+  "status": "In Progress",
+  "image": "/projects/academic/vlsi-vga-biomedical-circuit.jpg",
+  "featured": true,
+  "company": "BE @ ENIT - École Nationale d'Ingénieurs de Tunis",
+  "technicalDetails": [
+    "Low-power VGA design in TSMC 180nm CMOS technology with 1.8V supply voltage and <1μW power consumption",
+    "Dual-mode operation supporting EMG signals (40dB gain, 2kHz bandwidth) and EOG signals (60dB gain, >10Hz bandwidth)",
+    "Differential amplifier architecture with transconductance stage and transimpedance feedback configuration",
+    "Digital gain control system with 4-bit binary control (16 gain combinations) using current steering technique",
+    "Performance specifications achieved:",
+    " • Gain range: 40-60 dB with linear progression",
+    " • Input-referred noise: <12 nV²/Hz",
+    " • Output-referred noise: <10 nV²/Hz",
+    " • Noise figure: <22 dB",
+    " • IIP3: >17 dBm for linearity",
+    " • PSRR: >60 dB for power line interference rejection",
+    "Cascaded VGA architecture for extended gain range and improved performance",
+    "Current mirror bias circuits replacing ideal current sources for practical implementation",
+    "Comprehensive parametric simulations and Monte Carlo analysis for process variation robustness",
+    "Complete design flow: hand calculations → schematic design → simulation → layout → post-layout verification",
+    "Optimized transistor sizing with symmetrical differential pairs and current steering networks",
+    "Bio-potential signal conditioning for medical monitoring applications in WBAN systems"
+  ]
+},
+      {
+  "title": "RISC-V 32I Single-Cycle Processor Architecture",
+  "description": "Designed and implemented a complete single-cycle RISC-V processor architecture supporting the RV32I instruction set. The processor includes a comprehensive datapath with register bank, ALU, memory interface, and control unit, all implemented in VHDL with modular component design for educational and development purposes.",
+  "technologies": [
+    "VHDL",
+    "RISC-V RV32I ISA",
+    "Digital Logic Design",
+    "Computer Architecture",
+    "Hardware Description Languages",
+    "FPGA/ASIC Design",
+    "Vivado/QuestaSim"
+  ],
+  "category": "Computer Architecture",
+  "year": "2025",
+  "status": "In Progress",
+  "image": "/projects/academic/riscv-single-cycle-processor.jpg",
+  "featured": false,
+  "company": " BE @ ENIT - École Nationale d'Ingénieurs de Tunis",
+  "technicalDetails": [
+    "Complete RV32I instruction set implementation with support for R-type, I-type, S-type, B-type, U-type, and J-type instructions",
+    "Modular VHDL architecture with separate components for optimal design clarity and reusability",
+    "Register Bank (RegBank) with dual read ports and single write port, supporting 32 general-purpose registers",
+    "Arithmetic Logic Unit (ALU) implementing all required RISC-V operations (ADD, SUB, AND, OR, XOR, SLT, SLL, SRL, SRA)",
+    "Instruction Decoder extracting register addresses (rs1, rs2, rd) and immediate values (I, S, B, U, J formats)",
+    "Control Unit generating all necessary control signals for datapath coordination",
+    "Memory interface components:",
+    " • BE_generator - generates byte enable signals for memory access alignment",
+    " • input_data_manager - handles data formatting for load operations",
+    " • output_data_manager - formats data for store operations",
+    "Single-cycle execution with program counter (PC) management and next PC calculation",
+    "Support for immediate value multiplexing and ALU operand selection",
+    "Branch condition evaluation and jump target calculation",
+    "Memory-mapped I/O capability with proper data alignment and byte enable generation"
+  ]
+},
       {
   "title": "OnWire Link - IoT Firmware & Mobile App",
   "description": "Developed a complete IoT ecosystem during an engineering internship, including embedded firmware for ESP8266-based smart switches, a cross-platform Flutter mobile app, and complementary tools for provisioning, monitoring, and data analysis. The system integrates hybrid online/offline control, secure authentication, and automated scheduling with solar integration.",
