@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Omar Alibi - Creative Designer & Electrical Engineer | Brand Identity & IoT Solutions",
+    default: "Omar Alibi",
     template: "%s | Omar Alibi"
   },
   description: "Multidisciplinary designer and engineer combining creativity with technical expertise. Specializing in brand identity design, visual communication, and innovative IoT solutions. From logo design to embedded systems - bridging the gap between design and technology.",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     "System Monitoring",
     "DevOps Tools"
   ],
-  authors: [{ name: "Omar Alibi", url: "https://omaralibi.com" }],
+  authors: [{ name: "Omar Alibi", url: "https://omaralibi.tn" }],
   creator: "Omar Alibi",
   publisher: "Omar Alibi",
   formatDetection: {
@@ -123,7 +123,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US", 
     url: "https://omar-alibi.vercel.app/",
-    title: "Omar Alibi - Creative Designer & Engineer | Brand Identity Specialist",
+    title: "Omar Alibi ",
     description: "Multidisciplinary creative professional combining design expertise with engineering innovation. Specializing in brand identity, visual communication, and smart technology solutions.",
     siteName: "Omar Alibi - Creative Design & Engineering",
     images: [
@@ -137,7 +137,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Omar Alibi - Creative Designer & Engineer | Brand Identity Specialist",
+    title: "Omar Alibi",
     description: "Multidisciplinary creative combining design expertise with technical innovation. Brand identity • Visual design • Smart solutions.",
     creator: "@omaralibi", // Replace with your actual Twitter handle
     images: ["/og-image.jpg"], // Same image as OpenGraph
@@ -196,30 +196,17 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Omar Alibi",
-    jobTitle: ["Creative Designer", "Brand Identity Specialist", "Electrical Engineer"],
+    jobTitle: ["Electrical Engineer","Graphic Designer"],
     description: "Multidisciplinary creative professional combining design expertise with engineering innovation",
-    url: "https://omaralibi.com", // Replace with your actual domain
+    url: "https://omaralibi.tn", // Replace with your actual domain
     alumniOf: {
       "@type": "EducationalOrganization",
       name: "École Nationale d'Ingénieurs de Tunis (ENIT)",
       alternateName: "National Engineering School of Tunis"
     },
-    worksFor: [
-      {
-        "@type": "Organization",
-        name: "Freelance Creative Studio",
-        jobTitle: "Creative Designer & Brand Identity Specialist"
-      },
-      {
-        "@type": "Organization",
-        name: "OnWire Link",
-        jobTitle: "Engineering Consultant"
-      }
-    ],
     sameAs: [
-      "https://github.com/omaralibi", // Replace with your actual GitHub
-      "https://linkedin.com/in/omaralibi", // Replace with your actual LinkedIn
-      "https://twitter.com/omaralibi", // Replace with your actual Twitter
+      "https://github.com/alibiomar", 
+      "https://www.linkedin.com/in/omar-alibi/", 
     ],
     knowsAbout: [
       "Brand Identity Design",

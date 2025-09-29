@@ -330,8 +330,8 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                   <h3 className="text-2xl font-semibold mb-6 text-center">Academic Background</h3>
                   <div className="space-y-4">
                     <div className="text-center">
-                      <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3 pulse-glow">
-                        <span className="text-primary font-bold text-lg">{data.academic.institution}</span>
+                      <div className="w-16 h-16 mx-auto  flex items-center justify-center mb-3 pulse-glow">
+                        <Image src="/enit.png" alt={data.academic.institution} width={96} height={96} />
                       </div>
                       <p className="font-medium">{data.academic.program}</p>
                       <p className="text-sm text-muted-foreground">{data.academic.fullName}</p>
