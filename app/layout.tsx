@@ -111,36 +111,29 @@ export const metadata: Metadata = {
   creator: "Omar Alibi",
   publisher: "Omar Alibi",
   formatDetection: {
-    email: false,
+    email: true,
     address: false,
-    telephone: false,
+    telephone: true,
   },
-  metadataBase: new URL("https://omar-alibi.vercel.app"),
+  metadataBase: new URL("https://omaralibi.tn"),
   alternates: {
-    canonical: "https://omar-alibi.vercel.app/",
+    canonical: "https://omaralibi.tn/",
   },
   openGraph: {
     type: "website",
     locale: "en_US", 
-    url: "https://omar-alibi.vercel.app/",
+    url: "https://omaralibi.tn/",
     title: "Omar Alibi ",
     description: "Multidisciplinary creative professional combining design expertise with engineering innovation. Specializing in brand identity, visual communication, and smart technology solutions.",
-    siteName: "Omar Alibi - Creative Design & Engineering",
+    siteName: "Omar Alibi",
     images: [
       {
         url: "/og-image.jpg", // Add your Open Graph image
         width: 1200,
         height: 630,
-        alt: "Omar Alibi - Creative Designer and Engineer Portfolio",
+        alt: "Omar Alibi",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Omar Alibi",
-    description: "Multidisciplinary creative combining design expertise with technical innovation. Brand identity • Visual design • Smart solutions.",
-    creator: "@omaralibi", // Replace with your actual Twitter handle
-    images: ["/og-image.jpg"], // Same image as OpenGraph
   },
   robots: {
     index: true,
@@ -155,22 +148,21 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.ico", sizes: "16x16", type: "image/png" },
+      { url: "/logo.ico", sizes: "32x32", type: "image/png" },
       { url: "/logo.ico" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/logo.ico", sizes: "180x180", type: "image/png" },
     ],
     other: [
       {
         rel: "mask-icon",
-        url: "/safari-pinned-tab.svg",
+        url: "/logo.ico",
         color: "#000000",
       },
     ],
   },
-  manifest: "/site.webmanifest",
   category: "design",
 };
 
