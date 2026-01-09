@@ -244,7 +244,7 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   }
 
   return (
-    <section id="projects-section" className="py-20 px-6 theme-transition">
+    <section id="projects-section" className="py-20 px-6 theme-transition bg-background">
       <div className="max-w-6xl mx-auto">
         <div ref={headerRef}>
           <h2 className={`text-4xl font-bold mb-4 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>

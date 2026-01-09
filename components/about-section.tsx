@@ -116,7 +116,7 @@ export function AboutSection({ persona }: AboutSectionProps) {
   const content = persona === "engineer" ? engineerContent : freelancerContent
 
   return (
-    <section id="about" className="py-20 px-6 theme-transition">
+    <section id="about" className="py-20 px-6 theme-transition bg-background">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-bold mb-12 text-center">{content.title}</h2>
 

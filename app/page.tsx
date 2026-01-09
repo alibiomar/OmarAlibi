@@ -116,7 +116,7 @@ export default function HomePage() {
     <div>
       
       {persona === "freelancer" ? (
-        <div ref={freelancerRef} className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+        <div ref={freelancerRef} className="min-h-screen flex flex-col items-center justify-center px-4 relative bg-background overflow-hidden">
           {/* Floating geometric shapes */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute bottom-20 left-10 w-32 h-32 border border-purple-500/50 rounded-full animate-float" style={{animationDelay: '0s'}}></div>
@@ -135,7 +135,7 @@ export default function HomePage() {
             {/* Main heading with liquid chrome effect */}
             <div className="relative inline-block">
                 <Image src="/toocreativetoshow.webp" alt="Main Heading" width={500} height={100} className="-mb-14" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex justify-center">
+                <div className="w-full flex justify-center">
 
                     <button
                       onClick={togglePersona}
@@ -168,7 +168,7 @@ export default function HomePage() {
 
 
       ) : (
-    <div className="min-h-screen theme-transition relative overflow-hidden">
+    <div className="min-h-screen theme-transition relative overflow-hidden bg-background">
 
        
               <HeroSection persona={persona} onTogglePersona={togglePersona} />
@@ -181,8 +181,8 @@ export default function HomePage() {
       scaleOnHover
       pauseOnHover={false}
       fadeOut
-      className=" backdrop-blur-sm  fixed top-0 w-full z-30"
-      fadeOutColor="#0F1114"
+      className=" backdrop-blur-sm  fixed top-0 w-full z-30 bg-background"
+      fadeOutColor="#010202"
       ariaLabel="Technology partners"
       />
           <div ref={addToRefs}>

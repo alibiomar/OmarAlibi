@@ -364,8 +364,7 @@ export default function RootLayout({
           {children}
         </main>
         <footer 
-          className="w-full text-center p-4 text-sm text-gray-500 dark:text-gray-400"
-          role="contentinfo"
+          className="w-full text-center p-4 text-sm text-gray-500 dark:text-gray-400 bg-background"
         >
           <p className="font-medium italic scale-90">
             Designed and developed by me.
