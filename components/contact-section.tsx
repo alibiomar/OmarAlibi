@@ -64,6 +64,7 @@ export function ContactSection({ persona }: ContactSectionProps) {
               trigger: headerRef.current,
               start: "top 80%",
               toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
             },
           }
         )
@@ -92,6 +93,7 @@ export function ContactSection({ persona }: ContactSectionProps) {
                 trigger: cardsRef.current,
                 start: "top 75%",
                 toggleActions: "play none none reverse",
+                invalidateOnRefresh: true,
               },
             }
           )

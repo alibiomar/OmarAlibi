@@ -141,57 +141,69 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   }, [selectedProject])
 
   useEffect(() => {
-    // Animate header
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current.children,
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      )
-    }
+    const ctx = gsap.context(() => {
+      // Animate header
+      if (headerRef.current && headerRef.current.children.length > 0) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        )
+      }
 
-    // Animate project cards
-    if (projectsGridRef.current) {
-      const cards = projectsGridRef.current.querySelectorAll('.project-card')
-      
-      gsap.fromTo(
-        cards,
-        { 
-          opacity: 0, 
-          y: 60,
-          scale: 0.9,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: projectsGridRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
+      // Animate project cards
+      if (projectsGridRef.current) {
+        const cards = projectsGridRef.current.querySelectorAll('.project-card')
+        
+        if (cards.length > 0) {
+          gsap.fromTo(
+            cards,
+            { 
+              opacity: 0, 
+              y: 60,
+              scale: 0.9,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              stagger: 0.15,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: projectsGridRef.current,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
         }
-      )
-    }
+      }
+    })
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
+    return () => ctx.revert()
   }, [persona, showAll])
+
+  // Refresh ScrollTrigger when showAll changes to recalculate positions
+  useEffect(() => {
+    // Wait for DOM to update after showAll changes
+    const timeoutId = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+
+    return () => clearTimeout(timeoutId)
+  }, [showAll])
 
   // Get data for current persona
   const data: ProjectData = projectsData[persona]
