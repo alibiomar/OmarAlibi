@@ -519,7 +519,7 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
           width={1200}
           height={675}
           className="w-full h-auto object-contain"
-          quality={90}
+          quality={75}
           priority
           sizes="(max-width: 1200px) 100vw, 1200px"
         />

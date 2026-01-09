@@ -508,7 +508,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                     alt="Profile Picture" 
                     fill
                     className="object-cover"
-                    quality={95}
+                    quality={75}
                     priority
                     sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 384px"
                     placeholder="blur"
