@@ -116,7 +116,7 @@ export default function HomePage() {
     <div>
       
       {persona === "freelancer" ? (
-        <div ref={freelancerRef} className="min-h-screen flex flex-col items-center justify-center px-4 relative bg-background overflow-hidden">
+        <div ref={freelancerRef} className="min-h-screen flex flex-col items-center justify-center px-4 relative  overflow-hidden">
           {/* Floating geometric shapes */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute bottom-20 left-10 w-32 h-32 border border-purple-500/50 rounded-full animate-float" style={{animationDelay: '0s'}}></div>

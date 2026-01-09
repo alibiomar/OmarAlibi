@@ -365,7 +365,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
   const content = persona === "engineer" ? engineerContent : freelancerContent
 
   return (
-    <section className="min-h-screen flex items-center bg-gradient-to-b from-[#0b213a] via-black/80 to-[#0F1114] md:bg-none justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 theme-transition relative overflow-hidden">
+    <section className="min-h-screen flex items-center bg-gradient-to-b from-[#0b213a] via-[#070d12] to-[#010202] md:bg-none justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 theme-transition relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="inset-0 w-full absolute" >
