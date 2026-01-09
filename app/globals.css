@@ -122,6 +122,18 @@ a,h1,h2,h3,h4,h5,h6,button {
 ::-webkit-scrollbar {
   display: none;
 }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   .theme-transition {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -266,7 +278,7 @@ a,h1,h2,h3,h4,h5,h6,button {
       @apply border-border outline-ring/50;
     }
     body {
-      @apply bg-background text-foreground;
+      @apply text-foreground;
     }
   }
 

@@ -8,6 +8,11 @@ import { ExternalLink, Github, Eye, ChevronDown, Calendar, MapPin, X } from "luc
 import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import projectsData from "@/data/projects-data.json"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { createPortal } from "react-dom"
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface ProjectsSectionProps {
   persona: PersonaType
@@ -98,6 +103,13 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   const [showAll, setShowAll] = useState(false)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const { loadedImages, observeElement } = useLazyLoading()
+  const projectsGridRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -114,6 +126,72 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
 
     return () => observer.disconnect()
   }, [])
+
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedProject])
+
+  useEffect(() => {
+    // Animate header
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current.children,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      )
+    }
+
+    // Animate project cards
+    if (projectsGridRef.current) {
+      const cards = projectsGridRef.current.querySelectorAll('.project-card')
+      
+      gsap.fromTo(
+        cards,
+        { 
+          opacity: 0, 
+          y: 60,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: projectsGridRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      )
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [persona, showAll])
 
   // Get data for current persona
   const data: ProjectData = projectsData[persona]
@@ -168,19 +246,21 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   return (
     <section id="projects-section" className="py-20 px-6 theme-transition">
       <div className="max-w-6xl mx-auto">
-        <h2 className={`text-4xl font-bold mb-4 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-          {data.sectionTitle}
-        </h2>
-        
-        <p className={`text-center text-muted-foreground mb-12 max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
-          {data.description}
-        </p>
+        <div ref={headerRef}>
+          <h2 className={`text-4xl font-bold mb-4 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+            {data.sectionTitle}
+          </h2>
+          
+          <p className={`text-center text-muted-foreground mb-12 max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
+            {data.description}
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div ref={projectsGridRef} className="grid md:grid-cols-2 gap-8">
           {displayedProjects.map((project, index) => (
             <Card
               key={index}
-              className={`theme-transition hover-lift overflow-hidden group ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
+              className={`project-card theme-transition hover-lift overflow-hidden group ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="relative h-48 overflow-hidden bg-muted" ref={(el) => observeElement(el, index)}>
@@ -225,8 +305,9 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                 {persona === "engineer" && project.company && (
                   <div className="absolute top-4 right-4">
                     <Badge variant="outline" className="bg-black/20 text-white border-white/30 backdrop-blur-sm">
-                      {project.company.includes("Professional") ? "Professional" : 
-                       project.company.includes("Internship") ? "Internship" : "Academic"}
+                      {project.company.includes("Personal") ? "Personal" : 
+                       project.company.includes("Internship") ? "Internship" : project.company.includes("Academic") ? "Academic" : "Professional"
+                       }
                     </Badge>
                   </div>
                 )}
@@ -412,25 +493,25 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
         )}
 
         {/* Project Details Modal */}
-      {selectedProject && (
-  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
-    <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto theme-transition" onClick={(e) => e.stopPropagation()}>
+      {mounted && selectedProject && createPortal(
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200" onClick={() => setSelectedProject(null)}>
+    <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto theme-transition animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
       <div className="relative">
-        <div className="relative h-64 md:h-80 overflow-hidden rounded-t-lg">
-  <Image
-    src={selectedProject.image || "/placeholder.svg"}
-    alt={selectedProject.title}
-    fill
-    className="object-cover"
-    sizes="(max-width: 768px) 100vw, 80vw"
-    priority
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="relative w-full overflow-hidden rounded-t-lg bg-muted">
+        <Image
+          src={selectedProject.image || "/placeholder.svg"}
+          alt={selectedProject.title}
+          width={1200}
+          height={675}
+          className="w-full h-auto object-contain"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
   <Button
     variant="secondary"
     size="sm"
-    className="absolute top-4 right-4"
+    className="absolute top-4 right-4 z-10"
     onClick={() => setSelectedProject(null)}
   >
     <X className="w-4 h-4" />
@@ -514,7 +595,8 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
         </div>
       </div>
     </div>
-  </div>
+  </div>,
+  document.body
 )}
       </div>
     </section>

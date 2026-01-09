@@ -9,6 +9,7 @@ import LightRays from '@/components/LightRays';
 import ShinyText from './ShinyText';
 import me from '../public/meWhenThe.png';
 import he from '../public/meWhenNo.png';
+import { gsap } from "gsap"
 
 interface HeroSectionProps {
   persona: PersonaType
@@ -233,30 +234,116 @@ function IntegratedPersonaSwitcher({ persona, onToggle }: { persona: PersonaType
 
 export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const skillsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 500)
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    // Add delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (!contentRef.current) return
+
+      // Animate hero content on mount
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+        
+        // Target elements within the contentRef scope
+        const h1 = contentRef.current?.querySelector("h1")
+        const h2 = contentRef.current?.querySelector("h2")
+        const description = contentRef.current?.querySelector(".hero-description")
+        const buttons = contentRef.current?.querySelectorAll(".hero-buttons > *")
+
+        if (h1) {
+          tl.from(h1, { 
+            opacity: 0, 
+            y: 50, 
+            duration: 1,
+            delay: 0.2
+          })
+        }
+
+        if (h2) {
+          tl.from(h2, { 
+            opacity: 0, 
+            y: 30, 
+            duration: 0.8
+          }, "-=0.6")
+        }
+
+        if (description) {
+          tl.from(description, { 
+            opacity: 0, 
+            y: 20, 
+            duration: 0.8
+          }, "-=0.4")
+        }
+
+        if (buttons && buttons.length > 0) {
+          tl.from(buttons, { 
+            opacity: 0, 
+            y: 20, 
+            stagger: 0.1,
+            duration: 0.6
+          }, "-=0.4")
+        }
+      }, contentRef)
+
+      // Animate skills with stagger
+      if (skillsRef.current && skillsRef.current.children.length > 0) {
+        gsap.from(skillsRef.current.children, {
+          opacity: 0,
+          scale: 0.8,
+          y: 20,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+          delay: 1.2
+        })
+      }
+
+      // Animate image on mount
+      if (imageRef.current) {
+        gsap.from(imageRef.current, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.5)",
+          delay: 0.5
+        })
+      }
+
+      return () => {
+        if (ctx) ctx.revert()
+      }
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [persona])
+
   const engineerContent = {
     name: "Omar Alibi",
     age: "23",
     title: "Electrical Engineer",
-    subtitle: "Advanced Reconfigurable and Real-Time Microelectronic Systems",
+    subtitle: "Embedded Systems • Edge AI • Real-Time Control • IoT Solutions",
     description:
-      "Specialized in cutting-edge microelectronics design and real-time signal processing systems. I develop high-performance embedded solutions, FPGA implementations, and advanced control systems for next-generation electronic applications.",
+      "Building intelligent embedded systems from bare metal to cloud. Specialized in real-time control systems, edge AI deployment, RISC-V architecture, and industrial IoT platforms. From kernel modules to neural networks running on microcontrollers.",
     cta: "View Engineering Projects",
         education: "ENIT - École Nationale d'Ingénieurs de Tunis",
 
     skills: [
-      "Microelectronics Design", 
-      "IoT & Industry 4.0", 
-      "FPGA Development", 
-      "Embedded C/C++", 
-      "Real-Time Systems",
-      "PCB Design & Simulation",
-      "Machine Learning"
+      "Real-Time Embedded Systems", 
+      "Edge AI & TinyML", 
+      "RISC-V & SoC Design", 
+      "Industrial IoT", 
+      "Linux Kernel Development",
+      "STM32 & ARM Cortex",
+      "Computer Vision"
     ],
     icon: Cpu,
   }
@@ -278,10 +365,10 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
   const content = persona === "engineer" ? engineerContent : freelancerContent
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 theme-transition relative overflow-hidden">
+    <section className="min-h-screen flex items-center bg-gradient-to-b from-[#0b213a] via-black/80 to-[#0F1114] md:bg-none justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-20 theme-transition relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="inset-0 w-full absolute">
+        <div className="inset-0 w-full absolute" >
           <LightRays
             raysOrigin="top-center"
             raysColor={persona === "engineer" ?"#00ffff":"#ff004f"}
@@ -294,7 +381,9 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
             mouseInfluence={0.3}
             noiseAmount={0.3}
             distortion={0.01}
+            className="hidden md:block"
           />
+
         </div>
       </div>
 
@@ -304,7 +393,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-center py-5">
           
           {/* Left Column - Content */}
-          <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div ref={contentRef} className={`space-y-6 sm:space-y-8 transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             
             {/* Top section with name and image (mobile/tablet) */}
             <div className="space-y-4 sm:space-y-6">
@@ -329,18 +418,6 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-balance leading-tight text-white flex-1">
                     {content.name}
                   </h1>
-                  
-                  {/* Image next to name on mobile/tablet */}
-                  <div className="lg:hidden flex-shrink-0">
-                    <div className="fixed top-0 right-0 w-28 h-28 sm:w-20 sm:h-20 md:w-24 md:h-24">
-                      <Image 
-                        src={persona === "engineer" ? me : he} 
-                        alt="Profile Picture" 
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -355,11 +432,11 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
               </div>
             </div>
 
-            <p className="text-base sm:text-lg text-white/50 leading-relaxed max-w-2xl text-pretty">
+            <p className="hero-description text-base sm:text-lg text-white/50 leading-relaxed max-w-2xl text-pretty">
               {content.description}
             </p>
 
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+            <div ref={skillsRef} className="flex flex-wrap gap-2 sm:gap-3">
               {content.skills.map((skill, index) => (
                 <span
                   key={skill}
@@ -375,7 +452,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 onClick={() => document.querySelector('#projects-section')?.scrollIntoView({ behavior: 'smooth' })}
                 size="lg"
@@ -403,7 +480,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
                   <IntegratedPersonaSwitcher persona={persona} onToggle={onTogglePersona} />
                   <div className="flex gap-4 justify-center lg:justify-start z-20">
               {[
-                { icon: Github, href: "https://github.com/omaralibi", label: "GitHub" },
+                { icon: Github, href: "https://github.com/alibiomar", label: "GitHub" },
                 { icon: Linkedin, href: "https://linkedin.com/in/omar-alibi", label: "LinkedIn" },
                 { icon: Mail, href: "mailto:omar.alibi@etudiant-enit.utm.tn", label: "Email" }
               ].map(({ icon: Icon, href, label }, index) => (
@@ -421,16 +498,16 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
           </div>
 
           {/* Right Column - Desktop Image and Content */}
-          <div className={`lg:scale-150 scale-125 z-10 relative h-auto sm:h-auto lg:h-[600px] hidden lg:block transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div ref={imageRef} className={`lg:scale-150 scale-125 z-10 relative h-auto sm:h-auto lg:h-[600px] hidden lg:block transition-all duration-1000 delay-400 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <div className="relative w-full h-full flex flex-col items-center justify-center space-y-8">
               
               <div className="relative -mb-5">
-                <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-96 lg:h-96">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-96 lg:h-96">
                   <Image 
                     src={persona === "engineer" ? me : he} 
                     alt="Profile Picture" 
-                    layout="fill" 
-                    objectFit="cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 
@@ -443,7 +520,7 @@ export function HeroSection({ persona, onTogglePersona }: HeroSectionProps) {
               {/* Desktop Social Links */}
               <div className="flex gap-4 justify-center z-20">
                 {[
-                  { icon: Github, href: "https://github.com/omaralibi", label: "GitHub" },
+                  { icon: Github, href: "https://github.com/alibiomar", label: "GitHub" },
                   { icon: Linkedin, href: "https://linkedin.com/in/omar-alibi", label: "LinkedIn" },
                   { icon: Mail, href: "mailto:omar.alibi@etudiant-enit.utm.tn", label: "Email" }
                 ].map(({ icon: Icon, href, label }, index) => (

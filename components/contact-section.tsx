@@ -6,8 +6,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Calendar } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { z } from "zod"
+
+gsap.registerPlugin(ScrollTrigger)
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface ContactSectionProps {
   persona: PersonaType
@@ -35,27 +41,103 @@ export function ContactSection({ persona }: ContactSectionProps) {
   const [errors, setErrors] = useState<Partial<ContactFormData>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const contactRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Animate header
+    if (headerRef.current) {
+      gsap.fromTo(
+        headerRef.current.children,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      )
+    }
+
+    // Animate cards
+    if (cardsRef.current) {
+      const cards = cardsRef.current.querySelectorAll('.contact-card')
+      
+      gsap.fromTo(
+        cards,
+        { 
+          opacity: 0, 
+          y: 60,
+          rotateY: -15,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          rotateY: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      )
+
+      // Animate form inputs on focus
+      const inputs = cardsRef.current.querySelectorAll('input, textarea')
+      inputs.forEach((input) => {
+        input.addEventListener('focus', () => {
+          gsap.to(input, {
+            scale: 1.02,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        })
+        
+        input.addEventListener('blur', () => {
+          gsap.to(input, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          })
+        })
+      })
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [persona])
 
   const engineerContent = {
     title: "Get In Touch",
-    subtitle: "Ready to discuss your next electrical engineering project?",
+    subtitle: "Ready to discuss your next embedded systems or IoT project?",
     services: [
-      "Power System Design & Analysis",
-      "Industrial Automation Solutions",
-      "Renewable Energy Integration",
-      "Electrical Code Compliance Review",
+      "Embedded Systems & Real-Time Control",
+      "Edge AI & Machine Learning Integration",
+      "IoT Solutions & Industrial Automation",
+      "Custom SoC & RISC-V Development",
     ],
     availability: "Available for Internships & Full-time Roles",
   }
 
   const freelancerContent = {
     title: "Let's Create Together",
-    subtitle: "Have a project in mind? I'd love to hear about it.",
+    subtitle: "Have a web development or branding project? Let's bring it to life.",
     services: [
-      "Brand Identity & Logo Design",
-      "Website Design & Development",
-      "UI/UX Design Consultation",
-      "Digital Marketing Materials",
+      "Full-Stack Web Development (Next.js/React)",
+      "Brand Identity & Visual Design",
+      "E-commerce Platforms & Dashboards",
+      "UI/UX Design & Digital Marketing",
     ],
     availability: "Currently accepting new projects and collaborations",
   }
@@ -125,17 +207,17 @@ export function ContactSection({ persona }: ContactSectionProps) {
   }
 
   return (
-    <section id="contact" className="py-20 px-6 theme-transition">
+    <section ref={contactRef} id="contact" className="py-20 px-6 theme-transition">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <div ref={headerRef} className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4">{content.title}</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">{content.subtitle}</p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div ref={cardsRef} className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="space-y-8">
-            <Card className="theme-transition">
+            <Card className="contact-card theme-transition">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Mail className="w-5 h-5 text-primary" />
@@ -162,7 +244,7 @@ export function ContactSection({ persona }: ContactSectionProps) {
               </CardContent>
             </Card>
 
-            <Card className="theme-transition">
+            <Card className="contact-card theme-transition">
               <CardHeader>
                 <CardTitle>Services Offered</CardTitle>
               </CardHeader>
@@ -180,7 +262,7 @@ export function ContactSection({ persona }: ContactSectionProps) {
           </div>
 
           {/* Contact Form */}
-          <Card className="theme-transition">
+          <Card className="contact-card theme-transition">
             <CardHeader>
               <CardTitle>Send a Message</CardTitle>
             </CardHeader>

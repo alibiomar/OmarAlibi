@@ -3,32 +3,7 @@
     "sectionTitle": "Technical Projects & Experience",
     "description": "Electrical Engineering student with expertise in IoT systems, embedded electronics, web development, and industrial automation. Experienced in both academic research and professional internship projects.",
           "projects": [
-{
-  "title": "RISC-V 32I Single-Cycle Processor Architecture",
-  "description": "Designed and implemented a complete single-cycle RISC-V RV32I processor with integrated SoC architecture including instruction and data buses, ROM, and RAM components. The project spans from VHDL hardware implementation to assembly language testing.",
-  "technologies": [
-    "VHDL",
-    "RISC-V RV32I",
-    "Digital Logic Design",
-    "Computer Architecture",
-    "FPGA Design"
-  ],
-  "category": "Computer Architecture",
-  "year": "2025",
-  "status": "Completed",
-  "image": "/projects/academic/riscv-single-cycle-processor.png",
-  "featured": true,
-  "company": "BE @ ENIT - École Nationale d'Ingénieurs de Tunis",
-  "technicalDetails": [
-    "Complete RV32I instruction set implementation (R, I, S, B, U, J type instructions)",
-    "SoC architecture with instruction and data buses",
-    "Modular processor core with register bank, ALU, and control unit",
-    "Instruction decoder and immediate value generation",
-    "Memory components: ROM for instructions, RAM for data with byte-enable control",
-    "Data formatting for load/store operations",
-    "Tested with assembly program for array summation operations"
-  ]
-},
+
       {
   "title": "OnWire Link - IoT Firmware & Mobile App",
   "description": "Developed a complete IoT ecosystem during an engineering internship, including embedded firmware for ESP8266-based smart switches, a cross-platform Flutter mobile app, and complementary tools for provisioning, monitoring, and data analysis. The system integrates hybrid online/offline control, secure authentication, and automated scheduling with solar integration.",
@@ -60,6 +35,143 @@
     " • QR Code Generator (Python/Eel) – generates unique provisioning codes with SSID, password, MQTT credentials, and exports as printable PDFs",
     " • Switcher Life Checker (Web/React) – monitors device availability in real time via MQTT, provides dashboard and alerts (email/push)",
     " • Database File Processor (React/Node.js on Raspberry Pi 5) – processes CSV/JSON/Excel/SQLite, offers metadata extraction, filtering, visualization, batch analysis, and secure handling"
+  ]
+},
+{
+  "title": "STM32 Digit Classifier - Edge AI Handwritten Recognition",
+  "description": "Real-time handwritten digit recognition system running neural network inference directly on STM32 microcontroller. Features interactive Tkinter GUI for drawing digits with on-chip AI inference powered by X-CUBE-AI and TensorFlow Lite, demonstrating embedded machine learning on resource-constrained devices.",
+  "technologies": [
+    "STM32F411VET6",
+    "TensorFlow Lite",
+    "X-CUBE-AI",
+    "Python",
+    "Tkinter",
+    "STM32CubeIDE",
+    "STM32CubeMX",
+    "UART Serial Communication",
+    "Embedded ML",
+    "INT8 Quantization"
+  ],
+  "category": "Embedded Machine Learning",
+  "year": "2025",
+  "status": "Completed",
+  "image": "/projects/engineer/stm32-digit-classifier-edge-ai-tflite.jpg",
+  "featured": true,
+  "company": "ENIT - Academic Project",
+  "link": "https://github.com/alibiomar/stm32-digit-classifier",
+  "technicalDetails": [
+    "Neural network inference running entirely on STM32F411VET6 Cortex-M4 microcontroller with X-CUBE-AI middleware",
+    "TensorFlow Lite model trained on EMNIST dataset, converted to INT8 quantized format (~10KB model size) for optimal MCU performance",
+    "Interactive Python/Tkinter GUI with 320×320 drawing canvas, smooth brush controls, and real-time result visualization",
+    "UART serial communication protocol (115200 baud) for seamless PC-to-STM32 image transmission and prediction return",
+    "Complete inference pipeline: 28×28 pixel preprocessing → UART transmission → on-chip AI inference → result display with minimal latency",
+    "Standalone executable built with PyInstaller requiring no Python installation for end users",
+    "TFLite-to-C code conversion using STM32CubeMX X-CUBE-AI expansion, embedding model weights and network structure in firmware",
+    "Demonstrates practical edge AI implementation on resource-constrained embedded systems with Cortex-M4 processing"
+  ]
+},
+{
+  "title": "ASL Fingerspelling Recognition for NVIDIA Jetson Nano",
+  "description": "Real-time American Sign Language fingerspelling letter recognition system optimized for NVIDIA Jetson Nano edge devices. Recognizes all 26 letters using MediaPipe hand tracking, TensorFlow/TensorRT-ONNX models, and rule-based motion detection with GPU-accelerated inference.",
+  "technologies": [
+    "NVIDIA Jetson Nano",
+    "TensorFlow",
+    "TensorRT-ONNX",
+    "MediaPipe",
+    "Python",
+    "OpenCV",
+    "CUDA",
+    "Edge AI",
+    "Machine Learning",
+    "Computer Vision"
+  ],
+  "category": "Edge AI & Machine Learning",
+  "year": "2025",
+  "status": "Completed",
+  "image": "/projects/engineer/asl-fingerspelling-jetson-nano-recognition.jpg",
+  "featured": true,
+  "company": "ENIT - Academic Project",
+  "link": "https://github.com/alibiomar/asl_recognation",
+  "technicalDetails": [
+    "Complete 26-letter ASL alphabet recognition: 24 static letters via MLP neural network, 2 motion letters (J, Z) via rule-based trajectory detection",
+    "Dual recognition modes: Full TensorFlow model with Piper TTS voice feedback for PC, TensorRT-ONNX GPU-accelerated inference for Jetson Nano",
+    "MediaPipe hand tracking with 21-point landmark detection (42 features: normalized coordinates, wrist-relative positioning, hand-size scaling)",
+    "MLP neural network architecture: Dense(256)→BatchNorm→Dropout(0.4), Dense(128)→BatchNorm→Dropout(0.3), Dense(64)→Dropout(0.2), Softmax(24) output achieving ~95%+ accuracy",
+    "Real-time processing optimized for 30 FPS on Jetson Nano (ARM Cortex-A57, 128-core Maxwell GPU, 4GB RAM)",
+    "Motion detection algorithm analyzing trajectory characteristics: finger type, path length, straightness, direction changes for J and Z letters",
+    "Complete ML pipeline: custom data collection tool, model training with 70/15/15 split and early stopping, H5 to ONNX conversion for TensorRT deployment",
+    "Interactive word building system with SPACE (add letter), BACKSPACE (delete), C (clear word), Q (quit) controls",
+    "Performance optimization: max performance mode (10W), TensorRT engine building, memory-efficient inference on edge device"
+  ]
+},
+{
+  "title": "RISC-V SoC with UART, GPIO & AXI-4 Lite Bus",
+  "description": "Complete System-on-Chip (SoC) implementation featuring a RISC-V RV32I processor with single-cycle architecture, UART serial communication, GPIO controller, memory management, and auxiliary coprocessor. Designed for FPGA deployment on Zybo Zynq 7000 with full AXI-4 Lite bus integration and QuestaSim simulation support.",
+  "technologies": [
+    "VHDL",
+    "RISC-V RV32I",
+    "AXI-4 Lite Bus",
+    "UART",
+    "GPIO Controller",
+    "Xilinx Vivado",
+    "QuestaSim/ModelSim",
+    "FPGA Design",
+    "Zybo Zynq 7000",
+    "xPack RISC-V Toolchain",
+    "Single-Cycle Architecture"
+  ],
+  "category": "Computer Architecture & SoC Design",
+  "year": "2025",
+  "status": "Completed",
+  "image": "/projects/engineer/riscv-soc-uart-gpio-axi-bus.webp",
+  "featured": true,
+  "company": "ENIT - Academic Project",
+  "link": "https://github.com/alibiomar/riscv-soc",
+  "technicalDetails": [
+    "Complete RV32I instruction set with single-cycle execution (CPI = 1) supporting all instruction types (R, I, S, B, U, J)",
+    "AXI-4 Lite protocol integration: dual memory bus architecture with separate instruction and data pathways, industry-standard interconnect with ready/valid handshaking",
+    "UART serial communication module with configurable baud rate, full-duplex operation, TX/RX buffers, and AXI-4 Lite slave interface",
+    "GPIO controller with programmable I/O pins, direction configuration per pin, and AXI-4 Lite slave interface for external hardware control",
+    "Hierarchical memory subsystem: dual-port RAM (2PN×4 architecture), boot ROM with pre-loaded initialization code, both with AXI-4 Lite interfaces",
+    "Auxiliary coprocessor for specialized operations and extended instruction processing via AXI-4 Lite slave interface",
+    "Comprehensive test suite: assembly programs (prog_asm_0-3) and C programs with xPack RISC-V toolchain compilation, runtime startup (crt0.S), and linker scripts",
+    "QuestaSim/ModelSim simulation environment with automated scripts (sim_system.do, wave_system.do) for design verification and waveform analysis",
+    "FPGA deployment on Zybo Zynq 7000 (XC7Z010): ~1,500-2,000 LUTs, 800-1,000 registers, 2-4 BRAMs, 100+ MHz max frequency with complete pin constraints (pins.xdc)",
+    "Performance characteristics: Peak IPC of 1.0 (one instruction per cycle), deterministic execution timing for all instruction types including LOAD/STORE/BRANCH"
+  ]
+},
+{
+  "title": "BeagleBone Black DC Motor Control - Real-Time PWM System",
+  "description": "Real-time control loop for DC motor on BeagleBone Black using PWM and PID controller. Features custom kernel module for encoder measurements, ADC-based command input, and SCHED_FIFO real-time user-space application with libgpiod GPIO control and cross-compiled ARM deployment.",
+  "technologies": [
+    "BeagleBone Black",
+    "ARM Cortex-A8",
+    "Linux Kernel Module",
+    "PWM Control",
+    "PID Controller",
+    "Real-Time Scheduling (SCHED_FIFO)",
+    "libgpiod",
+    "Cross-Compilation",
+    "C Programming",
+    "ADC Interface"
+  ],
+  "category": "Real-Time Embedded Systems",
+  "year": "2025",
+  "status": "Completed",
+  "image": "/projects/engineer/beaglebone-black-dc-motor-pwm-pid-control.jpeg",
+  "featured": true,
+  "company": "ENIT - Academic Project",
+  "link": "https://github.com/alibiomar/bbb-DCmotor-controll",
+  "technicalDetails": [
+    "Real-time control application running with SCHED_FIFO priority 70 for deterministic motor control performance",
+    "Custom Linux kernel module (SW_meas_P9_11.ko) for high-precision encoder timing measurements exposed via /proc filesystem",
+    "PWM output control on pin P9_14 through sysfs interface (PWM1A subsystem) for motor drive signal generation",
+    "ADC-based command input from on-board AIN3 channel (/sys/bus/iio/devices/iio:device0/in_voltage3_raw) for speed reference",
+    "PID controller implementation with tunable gains (KP, KI, KD) for closed-loop speed regulation and reference tracking",
+    "libgpiod integration for GPIO control and status LED toggling without deprecated sysfs GPIO interface",
+    "Cross-compilation toolchain setup for ARM (gcc-linaro arm-linux-gnueabihf) targeting BeagleBone Black architecture",
+    "Makefile-based build system linking against custom control library and prebuilt libgpiod for embedded target",
+    "Helper script (launchapp.sh) for automated kernel module insertion, real-time app launch with chrt, and module cleanup"
   ]
 },
             {

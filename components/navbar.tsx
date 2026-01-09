@@ -1,5 +1,5 @@
 import PillNav from './PillNav';
-import logo from '/public/logo.jpg';
+import logo from '../public/logo.jpg';
 
 export function Navbar() {
   return (
@@ -15,7 +15,7 @@ export function Navbar() {
         ]}
         ease="power2.easeOut"
         baseColor="rgba(255, 255, 255, 0.1)"
-        pillColor="rgba(255, 255, 255, 0.2)"
+        pillColor="rgba(255, 255, 255, 0)"
         autoDetectActive={true}
         sectionOffset={80} // Increased for better detection
         hoveredPillTextColor="#ffffff"

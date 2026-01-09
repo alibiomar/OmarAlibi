@@ -183,7 +183,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentYear = new Date().getFullYear();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -372,7 +371,7 @@ export default function RootLayout({
             Designed and developed by me.
           </p>
           <p>
-            &copy; {currentYear} Omar Alibi. All rights reserved.
+            &copy; {new Date().getFullYear()} Omar Alibi. All rights reserved.
           </p>
         </footer>
       </body>
