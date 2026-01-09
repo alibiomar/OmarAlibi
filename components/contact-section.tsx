@@ -8,12 +8,12 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Calendar } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { z } from "zod"
-
-gsap.registerPlugin(ScrollTrigger)
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface ContactSectionProps {
   persona: PersonaType
@@ -44,77 +44,95 @@ export function ContactSection({ persona }: ContactSectionProps) {
   const contactRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
+  const triggersRef = useRef<ScrollTrigger[]>([])
 
   useEffect(() => {
-    // Animate header
-    if (headerRef.current) {
-      gsap.fromTo(
-        headerRef.current.children,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
+    // Wait for next frame to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      // Animate header
+      if (headerRef.current) {
+        const headerTween = gsap.fromTo(
+          headerRef.current.children,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        )
+        if (headerTween.scrollTrigger) {
+          triggersRef.current.push(headerTween.scrollTrigger)
         }
-      )
-    }
+      }
 
-    // Animate cards
-    if (cardsRef.current) {
-      const cards = cardsRef.current.querySelectorAll('.contact-card')
-      
-      gsap.fromTo(
-        cards,
-        { 
-          opacity: 0, 
-          y: 60,
-          rotateY: -15,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotateY: 0,
-          stagger: 0.2,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      )
-
-      // Animate form inputs on focus
-      const inputs = cardsRef.current.querySelectorAll('input, textarea')
-      inputs.forEach((input) => {
-        input.addEventListener('focus', () => {
-          gsap.to(input, {
-            scale: 1.02,
-            duration: 0.3,
-            ease: "power2.out"
-          })
-        })
+      // Animate cards
+      if (cardsRef.current) {
+        const cards = cardsRef.current.querySelectorAll('.contact-card')
         
-        input.addEventListener('blur', () => {
-          gsap.to(input, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out"
+        if (cards.length > 0) {
+          const cardsTween = gsap.fromTo(
+            cards,
+            { 
+              opacity: 0, 
+              y: 60,
+              rotateY: -15,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              rotateY: 0,
+              stagger: 0.2,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: cardsRef.current,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
+          if (cardsTween.scrollTrigger) {
+            triggersRef.current.push(cardsTween.scrollTrigger)
+          }
+        }
+
+        // Animate form inputs on focus
+        const inputs = cardsRef.current.querySelectorAll('input, textarea')
+        inputs.forEach((input) => {
+          input.addEventListener('focus', () => {
+            gsap.to(input, {
+              scale: 1.02,
+              duration: 0.3,
+              ease: "power2.out"
+            })
+          })
+          
+          input.addEventListener('blur', () => {
+            gsap.to(input, {
+              scale: 1,
+              duration: 0.3,
+              ease: "power2.out"
+            })
           })
         })
-      })
-    }
+      }
+
+      // Refresh ScrollTrigger to recalculate positions
+      ScrollTrigger.refresh()
+    }, 100)
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      clearTimeout(timeoutId)
+      // Only kill triggers created by this component
+      triggersRef.current.forEach(trigger => trigger.kill())
+      triggersRef.current = []
     }
   }, [persona])
 
