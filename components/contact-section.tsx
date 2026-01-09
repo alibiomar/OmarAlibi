@@ -45,13 +45,13 @@ export function ContactSection({ persona }: ContactSectionProps) {
   const headerRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const triggersRef = useRef<ScrollTrigger[]>([])
+  const eventListenersRef = useRef<Array<{ element: Element; type: string; handler: EventListener }>>([])
 
   useEffect(() => {
-    // Wait for next frame to ensure DOM is ready
-    const timeoutId = setTimeout(() => {
+    const ctx = gsap.context(() => {
       // Animate header
-      if (headerRef.current) {
-        const headerTween = gsap.fromTo(
+      if (headerRef.current && headerRef.current.children.length > 0) {
+        gsap.fromTo(
           headerRef.current.children,
           { opacity: 0, y: 40 },
           {
@@ -67,9 +67,6 @@ export function ContactSection({ persona }: ContactSectionProps) {
             },
           }
         )
-        if (headerTween.scrollTrigger) {
-          triggersRef.current.push(headerTween.scrollTrigger)
-        }
       }
 
       // Animate cards
@@ -77,7 +74,7 @@ export function ContactSection({ persona }: ContactSectionProps) {
         const cards = cardsRef.current.querySelectorAll('.contact-card')
         
         if (cards.length > 0) {
-          const cardsTween = gsap.fromTo(
+          gsap.fromTo(
             cards,
             { 
               opacity: 0, 
@@ -98,41 +95,47 @@ export function ContactSection({ persona }: ContactSectionProps) {
               },
             }
           )
-          if (cardsTween.scrollTrigger) {
-            triggersRef.current.push(cardsTween.scrollTrigger)
-          }
         }
 
-        // Animate form inputs on focus
+        // Animate form inputs on focus/blur
         const inputs = cardsRef.current.querySelectorAll('input, textarea')
         inputs.forEach((input) => {
-          input.addEventListener('focus', () => {
+          const focusHandler = () => {
             gsap.to(input, {
               scale: 1.02,
               duration: 0.3,
               ease: "power2.out"
             })
-          })
+          }
           
-          input.addEventListener('blur', () => {
+          const blurHandler = () => {
             gsap.to(input, {
               scale: 1,
               duration: 0.3,
               ease: "power2.out"
             })
-          })
+          }
+
+          input.addEventListener('focus', focusHandler)
+          input.addEventListener('blur', blurHandler)
+          
+          eventListenersRef.current.push(
+            { element: input, type: 'focus', handler: focusHandler },
+            { element: input, type: 'blur', handler: blurHandler }
+          )
         })
       }
-
-      // Refresh ScrollTrigger to recalculate positions
-      ScrollTrigger.refresh()
-    }, 100)
+    }, contactRef)
 
     return () => {
-      clearTimeout(timeoutId)
-      // Only kill triggers created by this component
-      triggersRef.current.forEach(trigger => trigger.kill())
-      triggersRef.current = []
+      // Clean up event listeners
+      eventListenersRef.current.forEach(({ element, type, handler }) => {
+        element.removeEventListener(type, handler)
+      })
+      eventListenersRef.current = []
+      
+      // Clean up GSAP context (automatically kills all animations and ScrollTriggers)
+      ctx.revert()
     }
   }, [persona])
 
