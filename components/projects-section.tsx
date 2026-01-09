@@ -282,7 +282,10 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={85}
+                    loading={index < 4 ? "eager" : "lazy"}
+                    priority={index < 2 && project.featured}
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-muted to-muted-foreground/20 animate-pulse flex items-center justify-center">
@@ -516,7 +519,9 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
           width={1200}
           height={675}
           className="w-full h-auto object-contain"
+          quality={90}
           priority
+          sizes="(max-width: 1200px) 100vw, 1200px"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
