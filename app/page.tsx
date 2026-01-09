@@ -134,7 +134,10 @@ export default function HomePage() {
 
             {/* Main heading with liquid chrome effect */}
             <div className="relative inline-block">
-                <Image src="/toocreativetoshow.webp" alt="Main Heading" width={500} height={100} className="-mb-14" />
+                <Image src="/toocreativetoshow.webp" alt="Main Heading" width={500} height={100} className="-mb-14" quality={75}
+                    priority
+                    sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 384px"
+                    placeholder="blur"/>
                 <div className="w-full flex justify-center">
 
                     <button
