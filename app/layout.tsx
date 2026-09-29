@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Navbar } from "@/components/navbar";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Grain, Cursor, Preloader } from "@/components/fx";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -358,20 +361,19 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
-      <body className="dark font-sans antialiased">
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased bg-background`}>
+        {/* Preloader */}
+        <Preloader />
+        <Grain /><Cursor />
         <Navbar />
         <main role="main">
           {children}
         </main>
-        <footer 
-          className="w-full text-center p-4 text-sm text-gray-500 dark:text-gray-400 bg-background"
-        >
-          <p className="font-medium italic scale-90">
-            Designed and developed by me.
-          </p>
-          <p>
-            &copy; {new Date().getFullYear()} Omar Alibi. All rights reserved.
-          </p>
+        <footer className="border-t border-border px-6 py-6 md:px-12">
+          <div className="mx-auto flex max-w-[1600px] flex-col gap-2 sm:flex-row sm:justify-between mono-label">
+            <span>© {new Date().getFullYear()} Omar Alibi</span>
+            <span>Built with Next.js · Three.js · GSAP</span>
+          </div>
         </footer>
       </body>
     </html>

@@ -10,6 +10,7 @@ import Image from "next/image"
 import projectsData from "@/data/projects-data.json"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { WorkIndex } from "@/components/work-index"
 import { createPortal } from "react-dom"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -256,128 +257,19 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   }
 
   return (
-    <section id="projects-section" className="py-20 px-6 theme-transition bg-background">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects-section" className="py-32 px-6 md:px-12 theme-transition bg-background">
+      <div className="max-w-[1600px] mx-auto">
         <div ref={headerRef}>
-          <h2 className={`text-4xl font-bold mb-4 text-center ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
+          <h2 className={`text-5xl md:text-7xl font-semibold tracking-[-0.04em] mb-6 text-left ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
             {data.sectionTitle}
           </h2>
           
-          <p className={`text-center text-muted-foreground mb-12 max-w-3xl mx-auto ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
+          <p className={`text-muted-foreground mb-12 max-w-2xl ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
             {data.description}
           </p>
         </div>
 
-        <div ref={projectsGridRef} className="grid md:grid-cols-2 gap-8">
-          {displayedProjects.map((project, index) => (
-            <Card
-              key={index}
-              className={`project-card theme-transition hover-lift overflow-hidden group ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="relative h-48 overflow-hidden bg-muted" ref={(el) => observeElement(el, index)}>
-                {loadedImages.has(index) ? (
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={85}
-                    loading={index < 4 ? "eager" : "lazy"}
-                    priority={index < 2 && project.featured}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-muted to-muted-foreground/20 animate-pulse flex items-center justify-center">
-                    <div className="text-muted-foreground">Loading...</div>
-                  </div>
-                )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      setSelectedProject(project)
-                    }}
-                  >
-                    <Eye className="w-4 h-4 mr-2" />
-                    View Details
-                  </Button>
-                </div>
-
-                {project.featured && (
-                  <div className="absolute top-4 left-4">
-                    <Badge className={`${persona === "engineer" ? "bg-blue-500" : "bg-green-500"} text-white`}>
-                      Featured
-                    </Badge>
-                  </div>
-                )}
-
-                {persona === "engineer" && project.company && (
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="outline" className="bg-black/20 text-white border-white/30 backdrop-blur-sm">
-                      {project.company.includes("Personal") ? "Personal" : 
-                       project.company.includes("Internship") ? "Internship" : project.company.includes("Academic") ? "Academic" : "Professional"
-                       }
-                    </Badge>
-                  </div>
-                )}
-              </div>
-
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <Badge variant="secondary" className="mb-2">
-                    {project.category}
-                  </Badge>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <Calendar className="w-3 h-3" />
-                    {project.year}
-                  </div>
-                </div>
-                <CardTitle className="text-xl mb-2 leading-tight">{project.title}</CardTitle>
-                
-                {persona === "freelancer" && project.client && (
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground mb-2">
-                    <MapPin className="w-3 h-3" />
-                    {project.client}
-                  </div>
-                )}
-                
-                {persona === "engineer" && project.company && (
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground mb-2">
-                    <MapPin className="w-3 h-3" />
-                    {project.company}
-                  </div>
-                )}
-                
-                <div className="flex items-center gap-2">
-                  <Badge
-                    variant={project.status === "Completed" || project.status === "Live" ? "default" : "outline"}
-                    className="text-xs"
-                  >
-                    {project.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <p className="text-muted-foreground mb-4 leading-relaxed text-sm">{project.description}</p>
-
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span key={tech} className="px-2 py-1 bg-muted text-muted-foreground rounded-full text-xs hover-lift transition-colors hover:bg-primary/10">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <WorkIndex projects={displayedProjects} onSelect={(p) => setSelectedProject(p)} />
 
         {data.projects.length > 4 && (
           <div className={`mt-12 text-center ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
@@ -422,7 +314,7 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
 
               {/* Academic & Professional Info */}
               <Card className="theme-transition hover-lift">
-                <CardContent className="p-8">
+                <CardContent className="p-8 ">
                   <h3 className="text-2xl font-semibold mb-6 text-center">Academic Background</h3>
                   <div className="space-y-4">
                     <div className="text-center">
@@ -538,7 +430,7 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
     <div className="absolute top-4 left-4">
       <Badge
         className={`${
-          persona === "engineer" ? "bg-blue-500" : "bg-green-500"
+          persona === "engineer" ? "bg-accent-brand text-black" : "bg-accent-brand text-black"
         } text-white`}
       >
         Featured
