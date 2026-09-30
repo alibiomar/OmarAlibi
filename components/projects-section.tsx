@@ -10,7 +10,7 @@ import Image from "next/image"
 import projectsData from "@/data/projects-data.json"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { WorkIndex } from "@/components/work-index"
+import { WorkGrid } from "@/components/work-grid"
 import { createPortal } from "react-dom"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -257,19 +257,23 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
   }
 
   return (
-    <section id="projects-section" className="py-32 px-6 md:px-12 theme-transition bg-background">
+    <section id="projects-section" className="px-6 py-32 md:px-12 bg-background">
       <div className="max-w-[1600px] mx-auto">
         <div ref={headerRef}>
-          <h2 className={`text-5xl md:text-7xl font-semibold tracking-[-0.04em] mb-6 text-left ${isVisible ? "animate-fade-in-up" : "opacity-0"}`}>
-            {data.sectionTitle}
-          </h2>
-          
-          <p className={`text-muted-foreground mb-12 max-w-2xl ${isVisible ? "animate-fade-in-up" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
-            {data.description}
-          </p>
+          <p className="mono-label">(02) Selected work</p>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[7fr_5fr] lg:items-end">
+            <h2 className="serif text-[clamp(2.75rem,6.5vw,6.5rem)] leading-[0.95]">
+              {persona === "engineer" ? <>Systems I&rsquo;ve <span className="serif-i text-accent-brand">built</span>, from silicon to screen.</> : data.sectionTitle}
+            </h2>
+            <p className="max-w-md text-muted-foreground lg:justify-self-end">{data.description}</p>
+          </div>
+          <div className="sec-head mt-14 mb-0 border-b-0 pb-4">
+            <span className="mono-label !text-foreground">Index / {String(data.projects.length).padStart(2, "0")} projects</span>
+            <span className="mono-label hidden sm:block">Hover to colour · click for details</span>
+          </div>
         </div>
 
-        <WorkIndex projects={displayedProjects} onSelect={(p) => setSelectedProject(p)} />
+        <WorkGrid projects={displayedProjects as any} onSelect={(p) => setSelectedProject(p)} />
 
         {data.projects.length > 4 && (
           <div className={`mt-12 text-center ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
@@ -284,62 +288,6 @@ export function ProjectsSection({ persona }: ProjectsSectionProps) {
                 className={`w-4 h-4 ml-2 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
               />
             </Button>
-          </div>
-        )}
-
-        {/* Engineer-specific additional sections */}
-        {persona === "engineer" && data.skills && data.academic && (
-          <div className={`mt-16 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Technical Skills Highlight */}
-              <Card className="theme-transition hover-lift">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold mb-6 text-center">Core Technical Skills</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-medium mb-2 text-primary">{data.skills.embedded.title}</h4>
-                      <p className="text-sm text-muted-foreground">{data.skills.embedded.description}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-2 text-primary">{data.skills.web.title}</h4>
-                      <p className="text-sm text-muted-foreground">{data.skills.web.description}</p>
-                    </div>
-                    <div>
-                      <h4 className="font-medium mb-2 text-primary">{data.skills.iot.title}</h4>
-                      <p className="text-sm text-muted-foreground">{data.skills.iot.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Academic & Professional Info */}
-              <Card className="theme-transition hover-lift">
-                <CardContent className="p-8 ">
-                  <h3 className="text-2xl font-semibold mb-6 text-center">Academic Background</h3>
-                  <div className="space-y-4">
-                    <div className="text-center">
-                      <div className="w-16 h-16 mx-auto  flex items-center justify-center mb-3 pulse-glow">
-                        <Image src="/enit.png" alt={data.academic.institution} width={96} height={96} />
-                      </div>
-                      <p className="font-medium">{data.academic.program}</p>
-                      <p className="text-sm text-muted-foreground">{data.academic.fullName}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{data.academic.duration}</p>
-                    </div>
-                    <div className="pt-4 border-t">
-                      <h4 className="font-medium mb-2 text-center">Professional Experience</h4>
-                      <div className="space-y-2 text-sm">
-                        {data.academic.experience.map((exp, index) => (
-                          <div key={index} className="flex justify-between">
-                            <span>{exp.company}</span>
-                            <span className="text-muted-foreground">{exp.role}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         )}
 

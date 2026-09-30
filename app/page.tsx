@@ -2,11 +2,10 @@
 
 import { useThemeSwitcher } from "@/hooks/use-theme-switcher"
 import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
+import { ProfileSection } from "@/components/profile-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { ContactSection } from "@/components/contact-section"
 import { LogoLoop } from "@/components/LogoLoop"
-import { BigMarquee } from "@/components/fx"
 import {SiQt, SiReact,SiLinux,SiElectron,SiGrafana,SiJavascript,SiMongodb,SiPytorch,SiNodedotjs,SiMqtt,SiMysql,SiAdobeaftereffects ,SiNextdotjs, SiTypescript, SiHtml5,SiTailwindcss,SiAdobephotoshop,SiAdobeillustrator,SiAdobepremierepro,SiArduino, SiAnaconda,SiPython,SiCplusplus,SiC,SiRust,SiStmicroelectronics, SiGit,SiDocker,SiRaspberrypi } from 'react-icons/si';
 import Image from "next/image"
 
@@ -67,11 +66,10 @@ export default function HomePage() {
   return (
     <div className="relative bg-background ">
       <HeroSection persona={persona} onTogglePersona={togglePersona} />
-            <BigMarquee words={["Embedded", "Edge AI", "RISC-V", "IoT", "Real-time", "Firmware"]} />
 
       <LogoLoop logos={techLogos} speed={50} direction="left" logoHeight={28} gap={48} scaleOnHover fadeOut
-        fadeOutColor="#0a0a0a" ariaLabel="Tech stack" className=" py-6 text-foreground/70" />
-      <AboutSection persona={persona} />
+        fadeOutColor="#0a0a0a" ariaLabel="Tech stack" className="border-y border-border py-6 text-foreground/70" />
+      <ProfileSection persona={persona} />
       <ProjectsSection persona={persona} />
       <ContactSection persona={persona} />
     </div>

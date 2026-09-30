@@ -71,7 +71,7 @@ export function HeroSection({ persona, onTogglePersona }: { persona: PersonaType
       <div className="absolute inset-x-6 bottom-6 z-30 flex flex-col gap-6 md:inset-x-12 md:flex-row md:items-end md:justify-between">
         <div className="max-w-xl">
           <SplitText key={persona} text={c.line} tag="p" splitType="words" delay={80} animateOn="hover" textAlign="left" threshold={0} rootMargin="0px"
-            className="text-xl font-medium leading-tight tracking-tight md:text-3xl pl-4" />
+            className="serif text-3xl leading-[1.05] md:text-5xl pl-4" />
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Magnet padding={60} magnetStrength={4}>
               <a href="#projects-section" className="btn-solid">Selected work <ArrowUpRight className="h-4 w-4" /></a>

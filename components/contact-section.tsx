@@ -38,8 +38,8 @@ export function ContactSection({ persona }: { persona: PersonaType }) {
         <div>
           <p className="mono-label !text-background/60">(03) Contact</p>
           <a href="mailto:omar.alibi@etudiant-enit.utm.tn" data-hot
-            className="mt-8 block text-[clamp(3rem,9vw,8.5rem)] font-semibold leading-[0.88] tracking-[-0.055em] transition-colors hover:text-accent-brand">
-            Let’s build<br />something ↗
+            className="serif mt-8 block text-[clamp(3.5rem,10vw,9.5rem)] leading-[0.9] transition-colors hover:text-accent-brand">
+            Let’s build<br /><span className="serif-i">something</span> ↗
           </a>
         </div>
         <form onSubmit={submit} className="grid content-end gap-6 sm:grid-cols-2">
