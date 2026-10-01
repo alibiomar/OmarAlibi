@@ -1,12 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Navbar } from "@/components/navbar";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Instrument_Serif } from "next/font/google";
-import { Grain, Cursor, Preloader } from "@/components/fx";
+import { Boot } from "@/components/board/boot";
+import { Probe } from "@/components/board/probe";
 import "./globals.css";
-
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -174,14 +171,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { color: "#050d0a" },
   ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5, // Allow some zoom for accessibility
   userScalable: true, // Enable for accessibility
-  colorScheme: "dark light",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -348,15 +344,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="ink" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem("oa-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}` }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#050d0a" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="application-name" content="Omar Alibi Portfolio" />
@@ -364,20 +359,10 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
-      <body className={`${GeistSans.variable} ${GeistMono.variable} ${serif.variable} font-sans antialiased bg-background`}>
-        {/* Preloader */}
-        <Preloader />
-        <Grain /><Cursor />
-        <Navbar />
-        <main role="main">
-          {children}
-        </main>
-        <footer className="border-t border-border px-6 py-6 md:px-12">
-          <div className="mx-auto flex max-w-[1600px] flex-col gap-2 sm:flex-row sm:justify-between mono-label">
-            <span>© {new Date().getFullYear()} Omar Alibi</span>
-            <span>All rights reserved</span>
-          </div>
-        </footer>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
+        <Boot />
+        <Probe />
+        {children}
       </body>
     </html>
   );

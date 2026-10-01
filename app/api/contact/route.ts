@@ -23,7 +23,7 @@ const limiter = rateLimit({
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting
-    const ip = request.ip ?? '127.0.0.1'
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? '127.0.0.1'
     const { success } = await limiter.check(5, ip) // 5 requests per minute per IP
     
     if (!success) {
