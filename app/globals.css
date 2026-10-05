@@ -95,6 +95,18 @@ body {
 .ic-notch { position:absolute; left:50%; top:-1px; width:74px; height:37px; margin-left:-37px; border-radius:0 0 74px 74px; background:var(--sub); border:1px solid #2a302d; border-top:0; }
 .ic-dot { position:absolute; left:22px; top:22px; width:14px; height:14px; border-radius:99px; background:#050605; box-shadow:inset 0 2px 3px rgba(0,0,0,.9), 0 0 0 1px #2c322f; }
 
+/* tilting chip: pointer side is pressed back, opposite side lifts */
+.tilt-stage { perspective:1400px; }
+.tilt { --rx:0deg; --ry:0deg; --mx:50%; --my:50%; transform-style:preserve-3d; will-change:transform;
+  transform:rotateX(var(--rx)) rotateY(var(--ry)) scale(1); transition:transform .7s cubic-bezier(.16,1,.3,1), box-shadow .7s cubic-bezier(.16,1,.3,1); }
+.tilt[data-tilt="on"] { transform:rotateX(var(--rx)) rotateY(var(--ry)) scale(.992); transition:transform .12s ease-out, box-shadow .3s;
+  box-shadow:0 18px 50px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06); }
+.tilt > h1 { transform:translateZ(28px); }
+.tilt-sheen { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .4s;
+  background:radial-gradient(420px circle at var(--mx) var(--my), rgba(255,255,255,.07), transparent 60%); }
+.tilt[data-tilt="on"] .tilt-sheen { opacity:1; }
+@media (hover:none), (prefers-reduced-motion:reduce) { .tilt, .tilt[data-tilt="on"] { transform:none !important; } .tilt > h1 { transform:none; } .tilt-sheen { display:none; } }
+
 /* copper ground-pour hatch */
 .pour { background-image:repeating-linear-gradient(45deg, color-mix(in srgb,var(--gold) 40%,transparent) 0 1px, transparent 1px 9px); }
 

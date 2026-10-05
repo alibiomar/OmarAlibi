@@ -16,29 +16,41 @@ const projectCount = eng.projects.length
 const statement = "I design the hardware, write the firmware and ship the cloud dashboard. Real-time control, edge AI and industrial IoT, taken from schematic to production."
 
 const education = [
-  { addr: "0x2026", name: "Electrical Engineering", org: "National Engineering School of Tunis (ENIT)", span: "2023 – 2026", status: "Completed", logo: true },
+  { addr: "0x2026", name: "Electrical Engineering", org: "National Engineering School of Tunis (ENIT)", span: "2023 – 2026", status: "Graduated", logo: true },
   { addr: "0x2023", name: "Preparatory Cycle", org: "Preparatory Institute for Engineering Studies, El Manar", span: "2023", status: "" },
   { addr: "0x2021", name: "Baccalauréat, Technical Sciences", org: "Grade 17.43 / 20", span: "2021", status: "" },
 ]
-const experience = [
-  { when: "2026", role: "Engineering Intern (PFE)", org: "IoT Solutions Ltd · Malta", note: "Industrial IoT energy monitoring" },
-  { when: "2025", role: "Engineering Intern", org: "OnWire Link", note: "IoT firmware & mobile app" },
-  { when: "2024", role: "Technical Intern", org: "STEG", note: "" },
-  { when: "2024", role: "Founder & Manager", org: "ASHE", note: "" },
+const internships = [
+  { when: "2026", role: "Engineering Intern (PFE)", org: "IoT Solutions Ltd · Malta", note: "Industrial IoT energy monitoring", tag: "Final-year project", logo: "/logos/iotsolutions.png", w: 250, h: 252, invert: false },
+  { when: "2025", role: "Engineering Intern", org: "OnWireWay", note: "IoT firmware & mobile app", tag: "", logo: "/logos/onwireway.png", w: 100, h: 284, invert: true },
+  { when: "2024", role: "Technical Intern", org: "STEG", note: "Power systems observation & industrial operations", tag: "", logo: "/logos/steg.png", w: 128, h: 284, invert: false },
+]
+const languages = [
+  { name: "Arabic", level: "Native" },
+  { name: "English", level: "B2 · Upper-intermediate" },
+  { name: "French", level: "B2 · Upper-intermediate" },
+]
+const leadership = [
+  { when: "2024", org: "ASHE", role: "Founder & Manager" },
+  { when: "2025", org: "Securinets ENIT", role: "Founding Member" },
+  { when: "2023–2025", org: "ENIT Junior Enterprise", role: "Online Mission Head" },
+  { when: "2023–2025", org: "Fablab ENIT", role: "Senior Member" },
+  { when: "2024", org: "INJAZ Company Program · Econics", role: "Marketing Manager" },
 ]
 
 const modules = [
   { id: "core", ref: "U1", label: "CORE", sub: "Who I am", diag: ["OA-2026", "@ 100 MHz"] },
   { id: "io", ref: "U2", label: "I/O", sub: "Core technical skills", diag: [`${banks.length} banks`, `${pinCount} pins`] },
   { id: "mem", ref: "U3", label: "MEMORY", sub: "Academic background", diag: ["0x2026 ENIT", "✓ programmed"] },
-  { id: "log", ref: "U4", label: "LOG", sub: "Professional experience", diag: [`${experience.length} entries`, "boot: OK"] },
+  { id: "log", ref: "U4", label: "LOG", sub: "Internships", diag: [`${internships.length} internships`, "boot: OK"] },
+  { id: "aux", ref: "U5", label: "AUX", sub: "Leadership & languages", diag: [`${leadership.length} roles`, `${languages.length} langs`] },
 ]
 
 /* ── the diagram ─────────────────────────────── */
-const Y = [70, 190, 310, 430] // block centre-y in viewBox
+const Y = [60, 155, 250, 345, 440] // block centre-y in viewBox
 function Diagram({ active }: { active: number }) {
   return (
-    <svg viewBox="0 0 390 500" className="h-full w-full" role="img" aria-label="Block diagram of Omar's profile: core, I/O, memory and log connected by a bus">
+    <svg viewBox="0 0 390 500" className="h-full w-full" role="img" aria-label="Block diagram of Omar's profile: core, I/O, memory, internship log and aux connected by a bus">
       {/* bus */}
       <line x1="195" y1="16" x2="195" y2="484" stroke="var(--trace)" strokeWidth="6" />
       <line x1="195" y1="16" x2="195" y2="484" stroke="var(--gold)" strokeOpacity=".35" strokeWidth="1" strokeDasharray="2 8" />
@@ -57,15 +69,15 @@ function Diagram({ active }: { active: number }) {
           <g key={m.id}>
             <line x1={cx1} y1={Y[i]} x2={cx2} y2={Y[i]} stroke={on ? "var(--signal)" : "var(--trace)"} strokeWidth={on ? 2 : 3} className={on ? "flow" : ""} />
             <circle cx={cx2} cy={Y[i]} r="3.5" fill="var(--sub)" stroke={on ? "var(--signal)" : "var(--gold)"} strokeOpacity={on ? 1 : .6} />
-            <rect x={x} y={Y[i] - 44} width={w} height="88" stroke={on ? "var(--signal)" : "var(--border)"} style={{ fill: on ? "color-mix(in srgb,var(--signal) 10%,var(--sub))" : "var(--sub-2)", transition: "all .4s" }} />
+            <rect x={x} y={Y[i] - 38} width={w} height="76" stroke={on ? "var(--signal)" : "var(--border)"} style={{ fill: on ? "color-mix(in srgb,var(--signal) 10%,var(--sub))" : "var(--sub-2)", transition: "all .4s" }} />
             {/* pins */}
             {Array.from({ length: 5 }).map((_, k) => (
-              <rect key={k} x={left ? x - 5 : x + w} y={Y[i] - 34 + k * 16} width="5" height="6" fill="var(--gold)" opacity={on ? 1 : .45} />
+              <rect key={k} x={left ? x - 5 : x + w} y={Y[i] - 30 + k * 15} width="5" height="6" fill="var(--gold)" opacity={on ? 1 : .45} />
             ))}
-            <text x={x + 12} y={Y[i] - 24} fontSize="8" fontFamily="var(--font-mono)" letterSpacing="1.5" className="fill-dim">{m.ref}</text>
-            <text x={x + 12} y={Y[i] - 4} fontSize="17" fontWeight="600" fontFamily="var(--font-mono)" letterSpacing="1" fill={on ? "var(--signal)" : "var(--silk)"} style={{ transition: "fill .4s" }}>{m.label}</text>
-            <text x={x + 12} y={Y[i] + 16} fontSize="8.5" fontFamily="var(--font-mono)" className="fill-dim">{m.diag[0]}</text>
-            <text x={x + 12} y={Y[i] + 30} fontSize="8.5" fontFamily="var(--font-mono)" className="fill-dim">{m.diag[1]}</text>
+            <text x={x + 12} y={Y[i] - 21} fontSize="8" fontFamily="var(--font-mono)" letterSpacing="1.5" className="fill-dim">{m.ref}</text>
+            <text x={x + 12} y={Y[i] - 2} fontSize="17" fontWeight="600" fontFamily="var(--font-mono)" letterSpacing="1" fill={on ? "var(--signal)" : "var(--silk)"} style={{ transition: "fill .4s" }}>{m.label}</text>
+            <text x={x + 12} y={Y[i] + 14} fontSize="8.5" fontFamily="var(--font-mono)" className="fill-dim">{m.diag[0]}</text>
+            <text x={x + 12} y={Y[i] + 27} fontSize="8.5" fontFamily="var(--font-mono)" className="fill-dim">{m.diag[1]}</text>
           </g>
         )
       })}
@@ -112,7 +124,7 @@ export function Profile() {
             <p className="silk">(01) Profile</p>
             <h2 className="display mt-4 text-[clamp(2.6rem,7vw,6.5rem)]">System <span className="text-signal">overview</span></h2>
           </div>
-          <p className="silk hidden max-w-[16rem] text-right md:block">One chip. Four subsystems.<br />Scroll to route the bus.</p>
+          <p className="silk hidden max-w-[16rem] text-right md:block">One chip. Five subsystems.<br />Scroll to route the bus.</p>
         </div>
 
         <div className="grid gap-16 lg:grid-cols-[390px_1fr] lg:gap-24">
@@ -131,7 +143,7 @@ export function Profile() {
                 {statement.split(" ").map((w, i) => <span key={i}>{w} </span>)}
               </p>
               <dl className="mt-14 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
-                {[["DEGREE", "B.Eng · EE"], ["BAC", "17.43 / 20"], ["BOARDS", String(projectCount)], ["INTERNSHIPS", "3"]].map(([k, v]) => (
+                {[["DEGREE", "B.Eng · EE"], ["BAC", "17.43 / 20"], ["PROJECTS", String(projectCount)], ["INTERNSHIPS", String(internships.length)]].map(([k, v]) => (
                   <div key={k} className="bg-sub p-5">
                     <dt className="silk">{k}</dt>
                     <dd className="mt-2 font-mono text-xl text-silk md:text-2xl">{v}</dd>
@@ -186,20 +198,58 @@ export function Profile() {
               </div>
             </article>
 
-            {/* U4 — LOG : experience */}
+            {/* U4 — LOG : internships */}
             <article {...reg(3)}>
               <Head i={3} />
+              <ul className="space-y-5">
+                {internships.map((x, i) => (
+                  <li key={x.org} className="sr bracket grid overflow-hidden border border-border bg-sub-2 md:grid-cols-[14rem_1fr]" style={{ ["--d" as any]: `${i * 0.08}s` }}>
+                    {/* logo tile: light "label" so every logo reads, whatever its colours */}
+                    <div className="grid h-28 place-items-center bg-[#f3f2ee] p-5 md:h-auto md:min-h-[8.5rem]">
+                      <Image src={x.logo} alt={`${x.org} logo`} width={x.w} height={x.h}
+                        className={`h-auto w-auto max-h-[4.5rem] max-w-full object-contain ${x.invert ? "brightness-0" : ""}`} />
+                    </div>
+                    <div className="flex flex-col justify-between gap-5 p-6 md:p-7">
+                      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+                        <span className="silk flex items-center gap-2"><i className="led" /> {x.tag || "Completed"}</span>
+                        <span className="font-mono text-sm text-gold">{x.when}</span>
+                      </div>
+                      <div>
+                        <p className="text-2xl font-semibold leading-tight tracking-tight md:text-[1.75rem]">{x.org}</p>
+                        <p className="mt-1 text-silk/85">{x.role}</p>
+                        {x.note && <p className="mt-3 text-sm text-dim">{x.note}</p>}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            {/* U5 — AUX : leadership & languages */}
+            <article {...reg(4)}>
+              <Head i={4} />
               <div className="border border-border bg-sub-2/70 p-6 font-mono text-[13px] leading-7 md:p-9 md:text-[15px] md:leading-8">
-                {experience.map((x) => (
-                  <p key={x.org} className="sr">
-                    <span className="text-dim">[ {x.when} ]</span> <span className="text-led">OK</span>{" "}
-                    <span className="text-silk">{x.org}</span> <span className="text-dim">—</span> {x.role}
-                    {x.note && <span className="text-dim"> · {x.note}</span>}
+                <p className="sr text-dim">{"// leadership & extracurricular"}</p>
+                {leadership.map((l) => (
+                  <p key={l.org} className="sr">
+                    <span className="text-dim">[ {l.when} ]</span> <span className="text-led">OK</span>{" "}
+                    <span className="text-silk">{l.org}</span> <span className="text-dim">—</span> {l.role}
                   </p>
                 ))}
-                <p className="sr mt-2"><span className="text-dim">[ NOW  ]</span> <span className="text-signal">..</span> <span className="caret text-silk">Available for work</span></p>
+
+                <p className="sr mt-6 text-dim">{"// languages"}</p>
+                <p className="sr flex flex-wrap gap-x-6">
+                  {languages.map((l) => (
+                    <span key={l.name}>
+                      <span className="text-silk">{l.name}</span> <span className="text-dim">=</span> <span className="text-signal">{l.level.split(" ")[0]}</span>
+                    </span>
+                  ))}
+                </p>
+
+                <p className="sr mt-6"><span className="text-dim">[ NOW  ]</span> <span className="text-signal">..</span> <span className="caret text-silk">Fresh graduate, open to work</span></p>
               </div>
             </article>
+
           </div>
         </div>
       </div>

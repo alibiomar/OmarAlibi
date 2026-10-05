@@ -7,357 +7,68 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Omar Alibi",
-    template: "%s | Omar Alibi"
+    default: "Omar Alibi — Embedded Systems & IoT Engineer",
+    template: "%s | Omar Alibi",
   },
-  description: "Multidisciplinary designer and engineer combining creativity with technical expertise. Specializing in brand identity design, visual communication, and innovative IoT solutions. From logo design to embedded systems - bridging the gap between design and technology.",
+  description: "Omar Alibi is a fresh Electrical Engineering graduate from ENIT specializing in embedded systems, firmware, edge AI, RISC-V and industrial IoT. Open to junior engineering roles.",
   keywords: [
-    "Omar Alibi",
-    "Creative Designer",
-    "Electrical Engineer", 
-    "Brand Identity Designer",
-    "Multidisciplinary Designer",
-    "Logo Designer Tunisia",
-    "Technical Designer",
-    "Design Engineer",
-    "Visual Brand Identity",
-    "Creative Engineering",
-    "Restaurant Branding Specialist",
-    "Hospitality Brand Design",
-    "E-commerce Brand Identity",
-    "Cosmetic Brand Design",
-    "Event Brand Design",
-    "Educational Branding",
-    "Car Rental Branding",
-    "Corporate Identity Tunisia",
-    "Freelance Brand Designer",
-    "Creative Services Tunisia",
-    "Logo Design Services",
-    "Visual Identity Systems",
-    "Brand Guidelines Design",
-    "Print Design Tunisia",
-    "Marketing Materials Design",
-    "Business Card Design",
-    "Social Media Brand Design",
-    "Creative Brand Solutions",
-    "Professional Branding Services",
-    "ENIT Graduate Designer",
-    "Technical Creative Professional",
-    "IoT Product Design",
-    "Embedded Systems Design",
-    "Smart Product Development",
-    "Creative Technology Solutions",
-    "Design Thinking",
-    "User Experience Design",
-    "Creative Problem Solving",
-    "Innovation Design",
-    "Technology Integration",
-    "Creative Engineering Solutions",
-    // Frontend Technologies
-    "React Developer",
-    "Next.js Developer",
-    "JavaScript Developer",
-    "TypeScript Developer",
-    "HTML5 CSS3",
-    "Tailwind CSS",
-    "Frontend Engineering",
-    // Backend & Full Stack
-    "Node.js Developer",
-    "Full Stack Developer",
-    "MongoDB Developer",
-    "MySQL Database",
-    "MQTT Protocol",
-    "Electron Apps",
-    // Engineering & Embedded
-    "Arduino Projects",
-    "STM32 Microcontroller",
-    "Raspberry Pi Projects",
-    "Embedded C Programming",
-    "IoT Solutions",
-    "Linux Systems",
-    "FreeRTOS",
-    "Real-time Systems",
-    // Engineering Tools
-    "MATLAB Engineering",
-    "Vivado FPGA",
-    "QuestaSim Simulation",
-    "LTSpice Circuit Design",
-    "Eagle PCB Design",
-    "Qt Creator",
-    "Docker Containers",
-    "Git Version Control",
-    // Data Science & AI
-    "Python Developer",
-    "PyTorch AI",
-    "Anaconda Data Science",
-    "Machine Learning",
-    "Data Analysis",
-    // Programming Languages
-    "C++ Programming",
-    "C Programming",
-    "Rust Programming",
-    "Systems Programming",
-    // Design Tools
-    "Adobe Photoshop",
-    "Adobe Illustrator",
-    "Adobe Premiere Pro",
-    "Adobe After Effects",
-    "Creative Suite Expert",
-    "Motion Graphics",
-    "Video Editing",
-    // Monitoring & DevOps
-    "Grafana Dashboards",
-    "System Monitoring",
-    "DevOps Tools"
+    "Omar Alibi", "Embedded Systems Engineer", "Embedded Firmware Engineer", "IoT Engineer",
+    "Edge AI Engineer", "RISC-V Engineer", "Firmware Developer", "Industrial IoT",
+    "Real-Time Embedded Systems", "PCB Design", "STM32 Firmware", "ESP8266 Firmware",
+    "FreeRTOS", "M-Bus", "MQTT", "FPGA Design", "Embedded Machine Learning",
+    "Industrial Energy Monitoring", "Electrical Engineering Graduate", "ENIT",
   ],
   authors: [{ name: "Omar Alibi", url: "https://omaralibi.tn" }],
   creator: "Omar Alibi",
   publisher: "Omar Alibi",
-  formatDetection: {
-    email: true,
-    address: false,
-    telephone: true,
-  },
+  formatDetection: { email: true, address: false, telephone: true },
   metadataBase: new URL("https://omaralibi.tn"),
-  alternates: {
-    canonical: "https://omaralibi.tn/",
-  },
+  alternates: { canonical: "https://omaralibi.tn/" },
   openGraph: {
     type: "website",
-    locale: "en_US", 
+    locale: "en_US",
     url: "https://omaralibi.tn/",
-    title: "Omar Alibi ",
-    description: "Multidisciplinary creative professional combining design expertise with engineering innovation. Specializing in brand identity, visual communication, and smart technology solutions.",
+    title: "Omar Alibi — Embedded Systems & IoT Engineer",
+    description: "Fresh Electrical Engineering graduate building embedded firmware, edge-AI systems and industrial IoT products.",
     siteName: "Omar Alibi",
-    images: [
-      {
-        url: "/og-image.jpg", // Add your Open Graph image
-        width: 1200,
-        height: 630,
-        alt: "Omar Alibi",
-      },
-    ],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Omar Alibi — Embedded Systems and IoT Engineer" }],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: [
-      { url: "/logo.ico", sizes: "16x16", type: "image/png" },
-      { url: "/logo.ico", sizes: "32x32", type: "image/png" },
-      { url: "/logo.ico" },
-    ],
-    apple: [
-      { url: "/logo.ico", sizes: "180x180", type: "image/png" },
-    ],
-    other: [
-      {
-        rel: "mask-icon",
-        url: "/logo.ico",
-        color: "#000000",
-      },
-    ],
-  },
-  category: "design",
+  twitter: { card: "summary_large_image", title: "Omar Alibi — Embedded Systems & IoT Engineer", description: "Embedded firmware, edge AI and industrial IoT projects from Omar Alibi.", images: ["/og-image.png"] },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 } },
+  icons: { icon: [{ url: "/logo.ico", sizes: "16x16", type: "image/png" }, { url: "/logo.ico", sizes: "32x32", type: "image/png" }, { url: "/logo.ico" }], apple: [{ url: "/logo.ico", sizes: "180x180", type: "image/png" }] },
+  category: "technology",
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { color: "#050d0a" },
-  ],
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5, // Allow some zoom for accessibility
-  userScalable: true, // Enable for accessibility
-  colorScheme: "dark",
+  themeColor: [{ color: "#050d0a" }], width: "device-width", initialScale: 1, maximumScale: 5, userScalable: true, colorScheme: "dark",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Omar Alibi",
-    jobTitle: ["Electrical Engineer","Graphic Designer"],
-    description: "Multidisciplinary creative professional combining design expertise with engineering innovation",
-    url: "https://omaralibi.tn", // Replace with your actual domain
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "École Nationale d'Ingénieurs de Tunis (ENIT)",
-      alternateName: "National Engineering School of Tunis"
-    },
-    sameAs: [
-      "https://github.com/alibiomar", 
-      "https://www.linkedin.com/in/omar-alibi/", 
-    ],
-    knowsAbout: [
-      "Brand Identity Design",
-      "Visual Identity Systems",
-      "Logo Design", 
-      "Creative Direction",
-      "Brand Strategy",
-      "Visual Communication",
-      "Graphic Design",
-      "Print Design",
-      "Digital Design",
-      "Marketing Materials",
-      "Corporate Branding",
-      "Restaurant Branding",
-      "Hospitality Design",
-      "Event Branding",
-      "E-commerce Branding",
-      "Educational Institution Branding",
-      "Creative Problem Solving",
-      "Design Thinking",
-      "User Experience Design",
-      "Creative Technology",
-      // Frontend Development
-      "React",
-      "Next.js",
-      "JavaScript",
-      "TypeScript",
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "Frontend Development",
-      // Backend & Database
-      "Node.js",
-      "MongoDB",
-      "MySQL",
-      "Database Design",
-      "API Development",
-      // Engineering & Embedded
-      "Electrical Engineering",
-      "IoT Systems",
-      "Embedded Design",
-      "Arduino",
-      "STM32",
-      "Raspberry Pi",
-      "Microcontroller Programming",
-      "Circuit Design",
-      "PCB Design",
-      "Real-time Systems",
-      "FreeRTOS",
-      "Linux Systems",
-      // Programming Languages
-      "C Programming",
-      "C++",
-      "Python",
-      "Rust",
-      "Systems Programming",
-      // Engineering Tools
-      "MATLAB",
-      "Vivado",
-      "QuestaSim",
-      "LTSpice",
-      "Eagle PCB",
-      "Qt Creator",
-      // DevOps & Tools
-      "Docker",
-      "Git",
-      "Grafana",
-      "System Monitoring",
-      // Data Science & AI
-      "PyTorch",
-      "Machine Learning",
-      "Data Analysis",
-      "Anaconda",
-      // Creative Software
-      "Adobe Photoshop",
-      "Adobe Illustrator",
-      "Adobe Premiere Pro",
-      "Adobe After Effects",
-      "Motion Graphics",
-      "Video Editing",
-      // Protocols & Communication
-      "MQTT",
-      "IoT Protocols",
-      "Wireless Communication",
-      // Applications
-      "Electron Apps",
-      "Desktop Applications",
-      "Cross-platform Development",
-      "Product Development",
-      "Smart Solutions",
-      "Innovation Design",
-      "Creative Engineering"
-    ],
-    hasCredential: [
-      {
-        "@type": "EducationalOccupationalCredential",
-        name: "Electrical Engineering Degree",
-        credentialCategory: "Bachelor's Degree",
-        educationalLevel: "Graduate",
-        recognizedBy: {
-          "@type": "EducationalOrganization",
-          name: "École Nationale d'Ingénieurs de Tunis"
-        }
-      }
-    ],
-    seeks: [
-      "Brand Identity Projects",
-      "Visual Identity Design",
-      "Logo Design Projects",
-      "Creative Direction",
-      "Brand Strategy Consulting",
-      "Restaurant & Hospitality Branding",
-      "E-commerce Brand Development",
-      "Corporate Identity Design",
-      "Creative Technology Projects",
-      "Smart Product Design",
-      "Innovation Consulting",
-      "Multidisciplinary Design Projects"
-    ],
-    serviceArea: {
-      "@type": "Place",
-      name: "Tunisia",
-      additionalProperty: "Remote services available globally"
-    },
-    offers: [
-      {
-        "@type": "Service",
-        name: "Brand Identity Design",
-        description: "Complete visual identity systems including logo design, brand guidelines, and marketing materials"
-      },
-      {
-        "@type": "Service", 
-        name: "Creative Direction",
-        description: "Strategic creative guidance for brands and businesses"
-      },
-      {
-        "@type": "Service",
-        name: "Smart Solutions Development", 
-        description: "IoT and embedded systems solutions with creative design integration"
-      }
-    ]
+    jobTitle: "Embedded Systems and IoT Engineer",
+    description: "Fresh Electrical Engineering graduate building embedded firmware, edge-AI systems and industrial IoT products.",
+    url: "https://omaralibi.tn",
+    alumniOf: { "@type": "EducationalOrganization", name: "École Nationale d'Ingénieurs de Tunis", alternateName: "National Engineering School of Tunis" },
+    sameAs: ["https://github.com/alibiomar", "https://www.linkedin.com/in/omar-alibi/"],
+    knowsAbout: ["Embedded Systems", "Embedded Firmware", "IoT Systems", "Edge AI", "Industrial Automation", "RISC-V", "PCB Design", "Real-time Systems", "STM32", "ESP8266", "FreeRTOS", "MQTT", "M-Bus", "Python", "C", "C++", "Rust", "FPGA Design", "ThingsBoard"],
+    seeks: ["Junior Embedded Systems Engineer", "Firmware Engineer", "IoT Engineer", "Edge AI Engineer"],
+    serviceArea: { "@type": "Place", name: "Tunisia", additionalProperty: "Open to relocation and remote engineering roles" },
+    hasOccupation: { "@type": "Occupation", name: "Embedded Systems Engineer", occupationLocation: { "@type": "Country", name: "Tunisia" }, skills: "Firmware, IoT, edge AI, RISC-V, PCB design" },
   };
 
   return (
     <html lang="en" data-theme="ink" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem("oa-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}` }} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <meta name="theme-color" content="#050d0a" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="application-name" content="Omar Alibi Portfolio" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
       </head>
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}>
         <Boot />

@@ -9,9 +9,10 @@ const schema = z.object({
   email: z.string().email("Invalid email"),
   subject: z.string().min(5, "Subject too short"),
   message: z.string().min(10, "Message too short"),
+  website: z.string().max(0).optional(),
 })
 type F = z.infer<typeof schema>
-const empty: F = { firstName: "", lastName: "", email: "", subject: "", message: "" }
+const empty: F = { firstName: "", lastName: "", email: "", subject: "", message: "", website: "" }
 const fields: [keyof F, string][] = [["firstName", "First name"], ["lastName", "Last name"], ["email", "Email"], ["subject", "Subject"]]
 
 export function Contact() {
@@ -60,6 +61,7 @@ export function Contact() {
                 className={`${line} ${k === "subject" || k === "email" ? "sm:col-span-2" : ""}`} />
             ))}
             <textarea aria-label="Message" placeholder="Message" rows={4} value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} className={`${line} resize-none sm:col-span-2`} />
+            <input aria-hidden="true" tabIndex={-1} autoComplete="off" value={f.website} onChange={(e) => setF({ ...f, website: e.target.value })} className="absolute -left-[9999px] h-px w-px opacity-0" />
             <div className="flex flex-wrap items-center justify-between gap-4 sm:col-span-2">
               <button disabled={status === "sending"} className="inline-flex items-center gap-3 bg-ink px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[.14em] text-signal transition-transform hover:-translate-y-0.5 disabled:opacity-50">
                 {status === "sending" ? "Flashing…" : "Send message"} <ArrowUpRight className="h-4 w-4" />

@@ -1,0 +1,461 @@
+"use client"
+
+import type { PersonaType } from "@/hooks/use-theme-switcher"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { ExternalLink, Github, Eye, ChevronDown, Calendar, MapPin, X } from "lucide-react"
+import { useEffect, useState, useRef } from "react"
+import Image from "next/image"
+import projectsData from "@/data/projects-data.json"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { WorkGrid } from "@/components/work-grid"
+import { createPortal } from "react-dom"
+
+gsap.registerPlugin(ScrollTrigger)
+
+interface ProjectsSectionProps {
+  persona: PersonaType
+}
+
+interface Project {
+  title: string
+  description: string
+  technologies: string[]
+  category: string
+  year: string
+  status: string
+  image: string
+  featured: boolean
+  company?: string
+  client?: string
+  link?: string
+  technicalDetails?: string[]
+  highlights?: string[]
+}
+
+interface Experience {
+  company: string
+  role: string
+}
+
+interface Client {
+  name: string
+  industry: string
+}
+
+interface ProjectData {
+  sectionTitle: string
+  description: string
+  projects: Project[]
+  skills?: {
+    embedded: { title: string; description: string }
+    web: { title: string; description: string }
+    iot: { title: string; description: string }
+  }
+  academic?: {
+    institution: string
+    program: string
+    fullName: string
+    duration: string
+    experience: Experience[]
+  }
+  services?: any
+  stats?: {
+    brandProjects: number | string
+    webProjects: number | string
+    recentClients: Client[]
+  }
+}
+
+function useLazyLoading() {
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set())
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0")
+            setLoadedImages((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: "50px" },
+    )
+
+    return () => observerRef.current?.disconnect()
+  }, [])
+
+  const observeElement = (element: HTMLElement | null, index: number) => {
+    if (element && observerRef.current) {
+      element.setAttribute("data-index", index.toString())
+      observerRef.current.observe(element)
+    }
+  }
+
+  return { loadedImages, observeElement }
+}
+
+export function ProjectsSection({ persona }: ProjectsSectionProps) {
+  const [isVisible, setIsVisible] = useState(false)
+  const [showAll, setShowAll] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const { loadedImages, observeElement } = useLazyLoading()
+  const projectsGridRef = useRef<HTMLDivElement>(null)
+  const headerRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    const element = document.getElementById("projects-section")
+    if (element) observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [])
+
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedProject])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate header
+      if (headerRef.current && headerRef.current.children.length > 0) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        )
+      }
+
+      // Animate project cards
+      if (projectsGridRef.current) {
+        const cards = projectsGridRef.current.querySelectorAll('.project-card')
+        
+        if (cards.length > 0) {
+          gsap.fromTo(
+            cards,
+            { 
+              opacity: 0, 
+              y: 60,
+              scale: 0.9,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              stagger: 0.15,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: projectsGridRef.current,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
+        }
+      }
+    })
+
+    return () => ctx.revert()
+  }, [persona, showAll])
+
+  // Refresh ScrollTrigger when showAll changes to recalculate positions
+  useEffect(() => {
+    // Wait for DOM to update after showAll changes
+    const timeoutId = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+
+    return () => clearTimeout(timeoutId)
+  }, [showAll])
+
+  // Get data for current persona
+  const data: ProjectData = projectsData[persona]
+  const displayedProjects = showAll ? data.projects : data.projects.slice(0, 4)
+
+  const renderProjectDetailsContent = (project: Project) => {
+    if (persona === "engineer" && project.technicalDetails) {
+      return (
+        <div>
+          <h3 className="text-xl font-semibold mb-3">Technical Details</h3>
+          <div className="bg-muted/50 rounded-lg p-4">
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {project.technicalDetails.map((detail, index) => (
+                <li key={index}>• {detail}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+    }
+
+    if (persona === "freelancer" && project.highlights) {
+      return (
+        <div>
+          <h3 className="text-xl font-semibold mb-3">Project Highlights</h3>
+          <div className="bg-muted/50 rounded-lg p-4">
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              {project.highlights.map((highlight, index) => (
+                <li key={index}>• {highlight}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div>
+        <h3 className="text-xl font-semibold mb-3">Project Details</h3>
+        <div className="bg-muted/50 rounded-lg p-4">
+          <p className="text-sm text-muted-foreground">
+            {persona === "engineer" 
+              ? "Detailed technical specifications and implementation details available upon request."
+              : "Custom design solutions tailored to client needs and industry requirements."
+            }
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <section id="projects-section" className="px-6 py-32 md:px-12 bg-background">
+      <div className="max-w-[1600px] mx-auto">
+        <div ref={headerRef}>
+          <p className="mono-label">(02) Selected work</p>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[7fr_5fr] lg:items-end">
+            <h2 className="serif text-[clamp(2.75rem,6.5vw,6.5rem)] leading-[0.95]">
+              {persona === "engineer" ? <>Systems I&rsquo;ve <span className="serif-i text-accent-brand">built</span>, from silicon to screen.</> : data.sectionTitle}
+            </h2>
+            <p className="max-w-md text-muted-foreground lg:justify-self-end">{data.description}</p>
+          </div>
+          <div className="sec-head mt-14 mb-0 border-b-0 pb-4">
+            <span className="mono-label !text-foreground">Index / {String(data.projects.length).padStart(2, "0")} projects</span>
+            <span className="mono-label hidden sm:block">Hover to colour · click for details</span>
+          </div>
+        </div>
+
+        <WorkGrid projects={displayedProjects as any} onSelect={(p) => setSelectedProject(p)} />
+
+        {data.projects.length > 4 && (
+          <div className={`mt-12 text-center ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              variant="outline"
+              size="lg"
+              className="hover-lift transform hover:scale-105 transition-all duration-300"
+            >
+              {showAll ? "Show Less" : `View All ${data.projects.length} Projects`}
+              <ChevronDown
+                className={`w-4 h-4 ml-2 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`}
+              />
+            </Button>
+          </div>
+        )}
+
+        {/* Freelancer-specific additional sections */}
+        {persona === "freelancer" && data.services && data.stats && (
+          <div className={`mt-16 ${isVisible ? "animate-fade-in-up animate-delay-400" : "opacity-0"}`}>
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Services Offered */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Services Offered</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium mb-2 text-primary">{data.services.industries.title}</h4>
+                      <p className="text-sm text-muted-foreground">{data.services.industries.description}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Client Types & Stats */}
+              <Card className="theme-transition hover-lift">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold mb-6 text-center">Client Portfolio</h3>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
+                          <span className="text-primary font-bold">{data.stats.brandProjects}</span>
+                        </div>
+                        <p className="text-sm font-medium">Brand Projects</p>
+                        <p className="text-xs text-muted-foreground">Completed</p>
+                      </div>
+                      <div>
+                        <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 pulse-glow">
+                          <span className="text-primary font-bold">{data.stats.webProjects}</span>
+                        </div>
+                        <p className="text-sm font-medium">Web Projects</p>
+                        <p className="text-xs text-muted-foreground">Live Sites</p>
+                      </div>
+                    </div>
+                    <div className="pt-4 border-t">
+                      <h4 className="font-medium mb-3 text-center">Recent Clients</h4>
+                      <div className="space-y-2 text-sm">
+                        {data.stats.recentClients.map((client, index) => (
+                          <div key={index} className="flex justify-between">
+                            <span>{client.name}</span>
+                            <span className="text-muted-foreground">{client.industry}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Project Details Modal */}
+      {mounted && selectedProject && createPortal(
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-in fade-in duration-200" onClick={() => setSelectedProject(null)}>
+    <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto theme-transition animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
+      <div className="relative">
+        <div className="relative w-full overflow-hidden rounded-t-lg bg-muted">
+        <Image
+          src={selectedProject.image || "/placeholder.svg"}
+          alt={selectedProject.title}
+          width={1200}
+          height={675}
+          className="w-full h-auto object-contain"
+          quality={75}
+          priority
+          sizes="(max-width: 1200px) 100vw, 1200px"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+  <Button
+    variant="secondary"
+    size="sm"
+    className="absolute top-4 right-4 z-10"
+    onClick={() => setSelectedProject(null)}
+  >
+    <X className="w-4 h-4" />
+  </Button>
+
+  {selectedProject.featured && (
+    <div className="absolute top-4 left-4">
+      <Badge
+        className={`${
+          persona === "engineer" ? "bg-accent-brand text-black" : "bg-accent-brand text-black"
+        } text-white`}
+      >
+        Featured
+      </Badge>
+    </div>
+  )}
+</div>
+
+        
+        <div className="p-8">
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+            <div>
+              <h2 className="text-3xl font-bold mb-2">{selectedProject.title}</h2>
+              <div className="flex items-center gap-4 text-muted-foreground">
+                <Badge variant="secondary">{selectedProject.category}</Badge>
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  {selectedProject.year}
+                </div>
+                {((persona === "engineer" && selectedProject.company) || (persona === "freelancer" && selectedProject.client)) && (
+                  <div className="flex items-center gap-1">
+                    <MapPin className="w-4 h-4" />
+                    {persona === "engineer" ? selectedProject.company : selectedProject.client}
+                  </div>
+                )}
+              </div>
+            </div>
+            <Badge
+              variant={selectedProject.status === "Completed" || selectedProject.status === "Live" ? "default" : "outline"}
+            >
+              {selectedProject.status}
+            </Badge>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Project Overview</h3>
+              <p className="text-muted-foreground leading-relaxed">{selectedProject.description}</p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Technologies Used</h3>
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.technologies.map((tech: string) => (
+                  <span key={tech} className="px-3 py-2 bg-muted text-muted-foreground rounded-full text-sm hover-lift transition-colors hover:bg-primary/10">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {renderProjectDetailsContent(selectedProject)}
+
+            <div className="flex flex-wrap gap-3 pt-4 border-t">
+              {( selectedProject.link) && (
+                <Button 
+                  variant="outline" 
+                  className=" z-50 cursor-pointer" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open( selectedProject.link, '_blank');
+                  }}
+                >
+                  <Github className="w-4 h-4 mr-2" />
+                  Source Code
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  document.body
+)}
+      </div>
+    </section>
+  )
+}

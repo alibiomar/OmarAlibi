@@ -20,6 +20,7 @@
         "category": "Industrial IoT & Energy Monitoring",
         "year": "2026",
         "status": "Defense 3 Oct 2026",
+        "impact": "14-platform benchmark · electricity + water monitoring · M-Bus acquisition",
         "image": "/projects/engineer/pfe-industrial-energy-monitoring-malta.png",
         "featured": true,
         "company": "IoT Solutions Ltd, Malta - Graduation Project (PFE)",
@@ -51,9 +52,10 @@
         "category": "Professional IoT",
         "year": "2025",
         "status": "Completed",
+        "impact": "Hybrid online/offline control · deep-sleep power saving · MQTT + TLS",
         "image": "/projects/engineer/onwire-link-iot-firmware-mobile-app.jpg",
         "featured": true,
-        "company": "OnWire Link - Engineering Internship",
+        "company": "OnWireWay",
         "technicalDetails": [
           "Firmware developed for ESP8266 with modular architecture (configuration, communication, scheduler, monitoring, offline fallback)",
           "Optimizations for memory, deep sleep power saving, and secure TLS/HTTPS communication",
@@ -85,6 +87,7 @@
         "category": "Embedded Machine Learning",
         "year": "2025",
         "status": "Completed",
+        "impact": "~10 KB INT8 model · real-time Cortex-M4 inference",
         "image": "/projects/engineer/stm32-digit-classifier-edge-ai-tflite.jpg",
         "featured": true,
         "company": "ENIT - Academic Project",
@@ -118,6 +121,7 @@
         "category": "Edge AI & Machine Learning",
         "year": "2025",
         "status": "Completed",
+        "impact": "26-letter alphabet · ~95%+ accuracy · 30 FPS on Jetson Nano",
         "image": "/projects/engineer/asl-fingerspelling-jetson-nano-recognition.jpg",
         "featured": true,
         "company": "ENIT - Academic Project",
@@ -342,16 +346,16 @@
     ],
     "skills": {
       "embedded": {
-        "title": "Embedded Systems",
-        "description": "Arduino, ESP32/8266, STM32, Raspberry Pi, BeagleBone, FPGA, PCB Design"
+        "title": "Embedded Systems & Electronics",
+        "description": "Arduino, ESP32/8266, STM32, Raspberry Pi, BeagleBone, Jetson Nano, Zybo Z7, Nordic nRF52, UART, SPI, I2C, CAN, M-Bus, ModBus, ModelSim, QuestaSim, Eagle PCB, PSpice, PSIM, ADS, LTSpice, Cadence, Vivado, C, C++, Rust, VHDL"
       },
       "web": {
-        "title": "Web & Software",
-        "description": "React, Next.js, Node.js, Python, Flutter, C/C++, Rust"
+        "title": "Software & Web Development",
+        "description": "Python, JavaScript, HTML/CSS, SQL, React, Next.js, Node.js, Electron.js, Firebase, Supabase, MongoDB, Git/GitHub, Docker, Linux, VPS, Full-stack web development"
       },
       "iot": {
-        "title": "IoT & Industrial",
-        "description": "MQTT, Industrial Automation, Real-time Systems"
+        "title": "IoT, Automation & Data",
+        "description": "MQTT, WebSocket, Node-RED, ThingsBoard, Grafana, MATLAB, Active GitHub with open-source and personal projects"
       }
     },
     "academic": {
@@ -361,7 +365,7 @@
       "duration": "2023 - Present",
       "experience": [
         {
-          "company": "OnWire Link",
+          "company": "OnWireWay",
           "role": "Engineering Intern"
         },
         {

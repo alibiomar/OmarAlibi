@@ -12,6 +12,7 @@ const contactSchema = z.object({
   subject: z.string().min(5, "Subject must be at least 5 characters"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   persona: z.enum(["engineer", "freelancer"]),
+  website: z.string().max(0).optional(),
 })
 
 // Rate limiting configuration
@@ -34,6 +35,11 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
+
+    // Silent success for bots that fill the visually hidden honeypot.
+    if (typeof body.website === 'string' && body.website.length > 0) {
+      return NextResponse.json({ message: 'Message sent successfully!' }, { status: 200 })
+    }
     
     // Validate request data
     const validatedData = contactSchema.parse(body)

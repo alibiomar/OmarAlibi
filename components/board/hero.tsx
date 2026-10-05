@@ -1,8 +1,9 @@
 "use client"
-import { useEffect, useState } from "react"
 import { ArrowDown, Github, Linkedin, Mail } from "lucide-react"
 import { TraceField } from "./trace-field"
 import { Scope } from "./scope"
+import { TiltChip } from "./tilt-chip"
+import { useVisitorLocation } from "./use-visitor-location"
 
 const socials = [
   { icon: Github, href: "https://github.com/alibiomar", label: "GitHub" },
@@ -11,11 +12,7 @@ const socials = [
 ]
 
 export function Hero() {
-  const [t, setT] = useState("--:--:--")
-  useEffect(() => {
-    const f = () => setT(new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: "Africa/Tunis" }).format(new Date()))
-    f(); const i = setInterval(f, 1000); return () => clearInterval(i)
-  }, [])
+  const { time, zone, city, coords } = useVisitorLocation()
 
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden">
@@ -27,14 +24,17 @@ export function Hero() {
         {/* board header */}
         <div className="rv flex flex-wrap items-center justify-between gap-x-8 gap-y-2" style={{ ["--d" as any]: "0s" }}>
           <p className="silk">Board <span className="silk-w">OA-2026</span> · Rev A · 4-layer</p>
-          <p className="silk hidden sm:block">36.8065°N 10.1815°E · Tunis <span className="silk-w tabular-nums">{t}</span> CET</p>
+          <p className="silk hidden sm:block" suppressHydrationWarning>
+            {coords && <>{coords} · </>}{city && <>{city} </>}<span className="silk-w tabular-nums">{time}</span>{zone && <> {zone}</>}
+          </p>
         </div>
 
         {/* the chip */}
         <div className="flex flex-1 items-center py-6 md:py-8">
-          <div className="ic rv mx-auto w-full max-w-[1240px] px-6 pb-6 pt-14 md:px-14 md:pb-7" style={{ ["--d" as any]: ".15s" }}>
+          <div className="rv mx-auto w-full max-w-[1240px]" style={{ ["--d" as any]: ".15s" }}>
+          <TiltChip className="px-6 pb-6 pt-14 md:px-14 md:pb-7">
             <i className="ic-notch" /><i className="ic-dot" />
-            <span className="silk absolute right-6 top-5 hidden !text-white/45 sm:block">U1 · Electrical Engineer</span>
+            <span className="silk absolute right-6 top-5 hidden !text-white/45 sm:block">U1 · Electrical Engineer · Class of 2026</span>
             <h1 className="display text-[clamp(3.4rem,min(12.5vw,24svh),13rem)]">
               <span className="sr-only">Omar Alibi, Electrical Engineer. </span>
               <span aria-hidden className="block outline-text">Omar</span>
@@ -45,6 +45,7 @@ export function Hero() {
               <span className="sm:text-center">Embedded · Edge AI · RISC-V · IoT</span>
               <span className="sm:text-right">LOT 0926 · ENIT · TN</span>
             </div>
+          </TiltChip>
           </div>
         </div>
 
@@ -55,15 +56,15 @@ export function Hero() {
               From bare metal to cloud<span className="text-signal">.</span>
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <p className="silk flex items-start gap-2"><i className="led mt-[3px] shrink-0" /><span>ENIT · Electrical Engineering · 2023–2026 · <span className="silk-w">Completed</span></span></p>
-              <p className="silk flex items-center gap-2"><i className="led o" /> <span className="silk-o">Available for work</span></p>
+              <p className="silk flex items-start gap-2"><i className="led mt-[3px] shrink-0" /><span>ENIT · Electrical Engineering · 2023–2026 · <span className="silk-w">Graduated</span></span></p>
+              <p className="silk flex items-start gap-2"><i className="led o mt-[3px]" /> <span className="silk-o">Open to work · Embedded / Firmware / IoT<br /><span className="!text-dim">Relocation or remote · Tunisia / Europe</span></span></p>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a href="#work" className="group inline-flex items-center gap-3 bg-signal px-6 py-4 font-mono text-xs font-semibold uppercase tracking-[.14em] text-on-signal transition-transform hover:-translate-y-0.5">
               Selected work <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />
             </a>
-            <a href="/Omar_Alibi_Resume.pdf" target="_blank" rel="noopener" className="border border-silk/60 px-6 py-4 font-mono text-xs uppercase tracking-[.14em] transition-colors hover:border-signal hover:text-signal">Résumé</a>
+            <a href="/Omar_Alibi_Resume.pdf" download className="border border-silk/60 px-6 py-4 font-mono text-xs uppercase tracking-[.14em] transition-colors hover:border-signal hover:text-signal">Download résumé</a>
             <span className="mx-1 hidden h-6 w-px bg-border sm:block" />
             {socials.map(({ icon: I, href, label }) => (
               <a key={label} href={href} target="_blank" rel="noopener" aria-label={label} className="grid h-12 w-12 place-items-center border border-border transition-colors hover:border-signal hover:text-signal"><I className="h-4 w-4" /></a>
