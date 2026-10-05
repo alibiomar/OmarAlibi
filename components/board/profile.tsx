@@ -22,7 +22,7 @@ const education = [
 ]
 const internships = [
   { when: "2026", role: "Engineering Intern (PFE)", org: "IoT Solutions Ltd · Malta", note: "Industrial IoT energy monitoring", tag: "Final-year project", logo: "/logos/iotsolutions.png", w: 250, h: 252, invert: false },
-  { when: "2025", role: "Engineering Intern", org: "OnWireWay", note: "IoT firmware & mobile app", tag: "", logo: "/logos/onwireway.png", w: 100, h: 284, invert: true },
+  { when: "2025", role: "Engineering Intern", org: "OnWireWay", note: "IoT firmware & mobile app", tag: "", logo: "/logos/onwireway.png", w: 100, h: 284, invert: false },
   { when: "2024", role: "Technical Intern", org: "STEG", note: "Power systems observation & industrial operations", tag: "", logo: "/logos/steg.png", w: 128, h: 284, invert: false },
 ]
 const languages = [
